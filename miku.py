@@ -105,7 +105,7 @@ elif "open google" in query.lower():
     url = "google.com"
     chrome_path = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
     webbrowser.get(chrome_path).open(url)
-elif "mask" in query.lower():
+elif "mask face" in query.lower():
     speak("Ok, master")
     import masker
 elif "play music" in query.lower():
@@ -114,5 +114,29 @@ elif "play music" in query.lower():
     songs = os.listdir(songs_dir)
     print(songs)
     os.startfile(os.path.join(songs_dir, songs[0]))
+#open microsoft office word
+elif "open word" in query.lower():
+    speak("Ok, master")
+    os.startfile("C:\\Program Files (x86)\\Microsoft Office\\Office14\\WINWORD.EXE")
+#open microsoft office excel
+elif "open excel" in query.lower():
+    speak("Ok, master")
+    os.startfile("C:\\Program Files (x86)\\Microsoft Office\\Office14\\EXCEL.EXE")
+#open microsoft office powerpoint
+elif "open powerpoint" in query.lower():
+    speak("Ok, master")
+    os.startfile("C:\\Program Files (x86)\\Microsoft Office\\Office14\\POWERPNT.EXE")
+#open file explorer
+elif "open explorer" in query.lower():
+    speak("Ok, master")
+    os.startfile("C:\\Users\\Ilyas Hidayat Rusdy\\Desktop\\")
+#open cmd
+elif "open cmd" in query.lower():
+    speak("Ok, master")
+    os.startfile("C:\\Windows\\System32\\cmd.exe")
+#close aplication
+elif "close" in query.lower():
+    speak("Ok, master")
+    exit()
 else:
     speak("sorry master, your order is not including my program")
