@@ -107,7 +107,7 @@ elif "open google" in query.lower():
     webbrowser.get(chrome_path).open(url)
 elif "mask face" in query.lower():
     speak("Ok, master")
-    import masker
+    os.system("python masker.py")
 elif "play music" in query.lower():
     speak("Ok, master")
     songs_dir = "C:\\Users\\Ilyas Hidayat Rusdy\\Music"
@@ -134,6 +134,10 @@ elif "open explorer" in query.lower():
 elif "open cmd" in query.lower():
     speak("Ok, master")
     os.startfile("C:\\Windows\\System32\\cmd.exe")
+#open notepad
+elif "open notepad" in query.lower():
+    speak("Ok, master")
+    os.startfile("C:\\Windows\\System32\\notepad.exe")
 #close aplication
 elif "close" in query.lower():
     speak("Ok, master")
