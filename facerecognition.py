@@ -19,9 +19,15 @@ while True:
         cv2.putText(frame, str(id), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
     cv2.imshow("Face Recognition", frame)
     key = cv2.waitKey(1)
+    #cari id dari database dengan loop dan jika ada kamera break
+    # for i in os.listdir('dataset'):
+    #     if i == str(id) + '.jpg':
+    #         print('id ditemukan')
+    #         break
     if id == 1:
-        #jalankan miku.py dan stop facerecognition.py
-        os.system('python miku.py')
+        print("Ilyas Hidayat Rusdy")
+        break
+    if key == ord('q'):
         break
 video.release()
 cv2.destroyAllWindows()

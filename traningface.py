@@ -2,6 +2,7 @@ import cv2, os
 import numpy as np
 from PIL import Image
 
+# Training model dengan metode LBPH (Local Binary Pattern Histogram)
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 detector = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 def getImagesWithLabels(path):
