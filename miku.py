@@ -79,6 +79,11 @@ if __name__ == "__main__":
     elif "youtube" in query.lower():
         speak("Ok master, searching youtube...")
         pywhatkit.playonyt(query.replace("youtube", ""))
+    #pause and resume youtube if it is playing
+    elif "pause youtube" in query.lower():
+        pywhatkit.pause()
+    elif "resume youtube" in query.lower():
+        pywhatkit.play()
     elif "time" in query.lower():
         time = datetime.datetime.now().strftime("%I:%M %p")
         print(time)
@@ -117,22 +122,42 @@ if __name__ == "__main__":
         songs = os.listdir(songs_dir)
         print(songs)
         os.startfile(os.path.join(songs_dir, songs[0]))
+    #close music if it is playing
+    elif "stop music" in query.lower():
+        speak("Ok, master")
+        os.system("pkill -9 mplayer")
     #open microsoft office word
     elif "open Microsoft Word" in query.lower():
         speak("Ok, master")
         os.startfile("C:\\Program Files (x86)\\Microsoft Office\\Office14\\WINWORD.EXE")
+    #close microsoft office word if it is open
+    elif "close Microsoft Word" in query.lower():
+        speak("Ok, master")
+        os.system("taskkill /f /im WINWORD.EXE")
     #open microsoft office excel
     elif "open Microsoft Excel" in query.lower():
         speak("Ok, master")
         os.startfile("C:\\Program Files (x86)\\Microsoft Office\\Office14\\EXCEL.EXE")
+    #close microsoft office excel if it is open
+    elif "close Microsoft Excel" in query.lower():
+        speak("Ok, master")
+        os.system("taskkill /f /im EXCEL.EXE")
     #open microsoft office powerpoint
     elif "open Microsoft Powerpoint" in query.lower():
         speak("Ok, master")
         os.startfile("C:\\Program Files (x86)\\Microsoft Office\\Office14\\POWERPNT.EXE")
+    #close microsoft office powerpoint if it is open
+    elif "close Microsoft Powerpoint" in query.lower():
+        speak("Ok, master")
+        os.system("taskkill /f /im POWERPNT.EXE")
     #open file explorer
     elif "open explorer" in query.lower():
         speak("Ok, master")
         os.startfile("C:\\Users\\Ilyas Hidayat Rusdy\\Desktop\\")
+    #close file explorer if it is open
+    elif "close explorer" in query.lower():
+        speak("Ok, master")
+        os.system("taskkill /f /im explorer.exe")
     #open cmd
     elif "open cmd" in query.lower():
         speak("Ok, master")
