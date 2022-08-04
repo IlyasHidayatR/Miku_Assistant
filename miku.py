@@ -5,9 +5,6 @@ import wikipedia
 import pywhatkit
 import webbrowser
 import os
-import nltk
-from nltk.stem.lancaster import LancasterStemmer
-stemmer = LancasterStemmer()
 import numpy as np
 import random
 import chat
@@ -56,23 +53,9 @@ def takeCommand():
             query = None
     return query
 
-#bag of words
-def bag_of_words(s, words):
-    bag = [0] * len(words)
-
-    s_words = nltk.word_tokenize(s)
-    s_words = [stemmer.stem(word.lower()) for word in s_words]
-
-    for se in s_words:
-        for i, w in enumerate(words):
-            if w == se:
-                bag[i] = 1
-
-    return np.array(bag)
-
 #chatbot AI
 def chatbot(inp):
-    results = chat.model.predict([bag_of_words(inp, chat.words)])
+    results = chat.model.predict([chat.bag_of_words(inp, chat.words)])
     results_index = np.argmax(results)
     tag = chat.labels[results_index]
 
@@ -97,8 +80,6 @@ if __name__ == "__main__":
         INTRO = ["please introduce you","who are you"]
         if query.lower() in INTRO:
             speak("My name is Kaito. I am the beta version of Miku. I was created in 2021 and my creator is named Ilyas Hidayat Rusdy. nice to meet you.")
-        elif "kaito" in query.lower():
-            chatbot(query)
         elif "wikipedia" in query.lower():
             speak("ok master, searching wikipedia...")
             query = query.replace("wikipedia", "")
@@ -163,6 +144,10 @@ if __name__ == "__main__":
         elif "stop music" in query.lower():
             speak("Ok, master")
             os.system("pkill -9 mplayer")
+        #next song if it is playing
+        elif "next song" in query.lower():
+            speak("Ok, master")
+            os.system("mpc next")
         #open microsoft office word
         elif "open microsoft word" in query.lower():
             speak("Ok, master")
@@ -207,5 +192,8 @@ if __name__ == "__main__":
         elif "close" in query.lower():
             speak("Ok, master")
             exit()
+        #chat with Kaito
+        elif "kaito" in query.lower():
+            chatbot(query)
         else:
             speak("sorry master, your order is not including my program")
