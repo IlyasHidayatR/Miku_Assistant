@@ -99,9 +99,11 @@ if __name__ == "__main__":
             pywhatkit.playonyt(query.replace("youtube", ""))
         #pause and resume youtube if it is playing
         elif "pause youtube" in query.lower():
-            pywhatkit.pause()
+            speak("Ok master, pausing youtube...")
+            pywhatkit.pauseonyt()
         elif "resume youtube" in query.lower():
-            pywhatkit.play()
+            speak("Ok master, resuming youtube...")
+            pywhatkit.resumeonyt()
         elif "time" in query.lower():
             time = datetime.datetime.now().strftime("%I:%M %p")
             print(time)
