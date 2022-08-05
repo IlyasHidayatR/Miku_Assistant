@@ -10,7 +10,7 @@ import random
 import chat
 
 
-print ("initializing Kaito")
+print ("initializing Hikaru Kaito")
 
 MASTER = "ilyas"
 
@@ -72,14 +72,14 @@ if __name__ == "__main__":
     os.system("facerecognition.py")
     wishMe()
     speak("I am ready master" + MASTER)
-    speak("Hello my name is Kaito, Can I help you master?")
+    speak("Hello my name is Hikaru Kaito, Can I help you master?")
 
     #logic for tasks as command
     while True:
         query = takeCommand()
         INTRO = ["please introduce you","who are you"]
         if query.lower() in INTRO:
-            speak("My name is Kaito. I am the beta version of Miku. I was created in 2021 and my creator is named Ilyas Hidayat Rusdy. nice to meet you.")
+            speak("My name is Hikaru Kaito. I am the beta version of Miku Project. I was created in 2021 and my creator is named Ilyas Hidayat Rusdy. nice to meet you.")
         elif "wikipedia" in query.lower():
             speak("ok master, searching wikipedia...")
             query = query.replace("wikipedia", "")
@@ -193,7 +193,7 @@ if __name__ == "__main__":
             speak("Ok, master")
             exit()
         #chat with Kaito
-        elif "kaito" in query.lower():
+        elif "hikaru" in query.lower():
             chatbot(query)
         else:
             speak("sorry master, your order is not including my program")
