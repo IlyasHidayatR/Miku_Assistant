@@ -29,5 +29,9 @@ while True:
         break
     if key == ord('q'):
         break
+    else:
+        print("Face not recognized")
+        #exit file miku.py
+        os._exit(0)
 video.release()
 cv2.destroyAllWindows()
