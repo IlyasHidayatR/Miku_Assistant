@@ -31,7 +31,5 @@ while True:
         break
     else:
         print("Face not recognized")
-        #exit file miku.py
-        os._exit(0)
 video.release()
 cv2.destroyAllWindows()
