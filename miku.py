@@ -7,7 +7,7 @@ import webbrowser
 import os
 import numpy as np
 import random
-import chat
+from chat import *
 
 
 print ("initializing Hikaru Kaito")
@@ -55,11 +55,11 @@ def takeCommand():
 
 #chatbot AI
 def chatbot(inp):
-    results = chat.model.predict([chat.bag_of_words(inp, chat.words)])
+    results = model.predict([bag_of_words(inp, words)])
     results_index = np.argmax(results)
-    tag = chat.labels[results_index]
+    tag = labels[results_index]
 
-    for tg in chat.data["intents"]:
+    for tg in data["intents"]:
         if tg["tag"] == tag:
             responses = tg["responses"]
 
