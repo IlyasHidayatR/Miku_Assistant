@@ -198,13 +198,15 @@ if __name__ == "__main__":
             os.system("facerecognition.py")
             # lockdoor()
         #on lampu
-        elif "on lamp" in query.lower():
+        elif "on the lamp" in query.lower():
             speak("Ok, master")
             onLamp('1')
+            speak("Lamp is on")
         #off lampu
-        elif "off lamp" in query.lower():
+        elif "off the lamp" in query.lower():
             speak("Ok, master")
             onLamp('0')
+            speak("Lamp is off")
         #close aplication
         elif "close" in query.lower():
             speak("Ok, master")

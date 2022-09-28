@@ -15,3 +15,14 @@ def onLamp(self):
         print(getValue())
     else:
         print("can't get value")
+
+    return user_input
+
+# def lockDoor(op):
+#     user_input = op
+#     if user_input == '2':
+#         print(getValue())
+#     else:
+#         print("can't get value")
+
+#     return user_input
