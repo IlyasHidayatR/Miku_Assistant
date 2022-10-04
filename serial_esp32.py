@@ -9,20 +9,22 @@ def getValue():
 
 def onLamp(self):
     user_input = self
-    if user_input == '1':
+    if user_input == 'a':
         print(getValue())
-    elif user_input == '0':
+    elif user_input == 'b':
+        print(getValue())
+    elif user_input == 'c':
         print(getValue())
     else:
         print("can't get value")
 
     return user_input
 
-# def lockDoor(op):
-#     user_input = op
-#     if user_input == '2':
-#         print(getValue())
-#     else:
-#         print("can't get value")
+def lockDoor(op):
+    user_input = op
+    if user_input == '2':
+        print(getValue())
+    else:
+        print("can't get value")
 
-#     return user_input
+    return user_input

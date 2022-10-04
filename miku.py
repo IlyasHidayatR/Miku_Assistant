@@ -8,8 +8,8 @@ import os
 import numpy as np
 import random
 from chat import *
-from serial_esp32 import *
-# from arduino_lockdoor import *
+# from serial_esp32 import *
+from arduino_tools import *
 
 
 print ("initializing Hikaru Kaito")
@@ -193,26 +193,26 @@ if __name__ == "__main__":
             speak("Ok, master")
             os.startfile("C:\\Windows\\System32\\notepad.exe")
         #open lock door selenoid
-        elif "open lock door" in query.lower():
+        elif "open lock door" in query.lower() or "open door" in query.lower():
             speak("Ok, master")
             os.system("facerecognition.py")
-            # lockdoor()
+            Operation(3)
         #on lampu
-        elif "on the lamp" in query.lower():
+        elif "on the lamp" in query.lower() or "on" in query.lower():
             speak("Ok, master")
-            onLamp('1')
+            Operation(1)
             speak("Lamp is on")
         #off lampu
-        elif "off the lamp" in query.lower():
+        elif "off the lamp" in query.lower() or "off" in query.lower():
             speak("Ok, master")
-            onLamp('0')
+            Operation(2)
             speak("Lamp is off")
         #close aplication
-        elif "close" in query.lower():
+        elif "close" in query.lower() or "exit" in query.lower():
             speak("Ok, master")
             exit()
         #chat with Kaito
-        elif "hikaru" in query.lower():
+        elif "hikaru" in query.lower() or "kaito" in query.lower():
             chatbot(query)
         else:
             speak("sorry master, your order is not including my program")
