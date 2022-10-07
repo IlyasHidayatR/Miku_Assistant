@@ -1,12 +1,10 @@
 import time
-import requests
+import urllib.request
 import serial
 
-# url for on and off LED and Lock Door
-ledON_url = "http://192.168.43.72/LED=ON"
-ledOFF_url = "http://192.168.43.72/LED=OFF"
-lockON_url = "http://192.168.43.72/LOCK=ON"
-lockOFF_url = "http://192.168.43.72/LOCK=OFF"
+# url for on and off LED and Lock Door dalam array
+Elektronik = ["http://192.168.43.72/LED=ON", "http://192.168.43.72/LED=OFF", "http://192.168.43.72/LOCK=ON", "http://192.168.43.72/LOCK=OFF"]
+
 
 # data_serial = serial.Serial('COM9', 9600)
 
@@ -20,19 +18,24 @@ def Operation(self):
     if self == 1:
         print("LED ON")
         try:
-            requests.get(ledON_url)
+            LED_ON = urllib.request.urlopen(Elektronik[0])
+            print(LED_ON)
+            print("LED is ON")
         except Exception as e:
             print("Error")
     elif self == 2:
         print("LED OFF")
         try:
-            requests.get(ledOFF_url)
+            LED_OFF = urllib.request.urlopen(Elektronik[1])
+            print(LED_OFF)
+            print("LED is OFF")
         except Exception as e:
             print("Error")
     elif self == 3:
         print("LOCK ON")
         try:
-            requests.get(lockON_url)
+            LOCK_ON = urllib.request.urlopen(Elektronik[2])
+            print(LOCK_ON)
             print("Lock Door is ON")
             # time.sleep(5)
             # r = requests.get(lockOFF_url)
@@ -42,7 +45,8 @@ def Operation(self):
     elif self == 4:
         print("LOCK OFF")
         try:
-            requests.get(lockOFF_url)
+            LOCK_OFF = urllib.request.urlopen(Elektronik[3])
+            print(LOCK_OFF)
             print ("Lock Door is OFF")
         except Exception as e:
             print("Error")

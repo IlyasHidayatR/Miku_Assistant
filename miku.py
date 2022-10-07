@@ -153,27 +153,27 @@ if __name__ == "__main__":
             speak("Ok, master")
             os.system("mpc next")
         #open microsoft office word
-        elif "open microsoft word" in query.lower():
+        elif "open microsoft word" in query.lower() or "open word" in query.lower():
             speak("Ok, master")
             os.startfile("C:\\Program Files (x86)\\Microsoft Office\\Office14\\WINWORD.EXE")
         #close microsoft office word if it is open
-        elif "close microsoft word" in query.lower():
+        elif "close microsoft word" in query.lower() or "close word" in query.lower():
             speak("Ok, master")
             os.system("taskkill /f /im WINWORD.EXE")
         #open microsoft office excel
-        elif "open microsoft excel" in query.lower():
+        elif "open microsoft excel" in query.lower() or "open excel" in query.lower():
             speak("Ok, master")
             os.startfile("C:\\Program Files (x86)\\Microsoft Office\\Office14\\EXCEL.EXE")
         #close microsoft office excel if it is open
-        elif "close microsoft excel" in query.lower():
+        elif "close microsoft excel" in query.lower() or "close excel" in query.lower():
             speak("Ok, master")
             os.system("taskkill /f /im EXCEL.EXE")
         #open microsoft office powerpoint
-        elif "open microsoft powerpoint" in query.lower():
+        elif "open microsoft powerpoint" in query.lower() or "open powerpoint" in query.lower():
             speak("Ok, master")
             os.startfile("C:\\Program Files (x86)\\Microsoft Office\\Office14\\POWERPNT.EXE")
         #close microsoft office powerpoint if it is open
-        elif "close microsoft powerpoint" in query.lower():
+        elif "close microsoft powerpoint" in query.lower() or "close powerpoint" in query.lower():
             speak("Ok, master")
             os.system("taskkill /f /im POWERPNT.EXE")
         #open file explorer
