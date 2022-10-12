@@ -22,7 +22,7 @@ def Operation(self):
             print(LED_ON)
             print("LED is ON")
         except Exception as e:
-            print("Error")
+            print(" ")
     elif self == 2:
         print("LED OFF")
         try:
@@ -30,7 +30,7 @@ def Operation(self):
             print(LED_OFF)
             print("LED is OFF")
         except Exception as e:
-            print("Error")
+            print(" ")
     elif self == 3:
         print("LOCK ON")
         try:
@@ -41,7 +41,7 @@ def Operation(self):
             # r = requests.get(lockOFF_url)
             # print(r)
         except Exception as e:
-            print("Error")
+            print(" ")
     elif self == 4:
         print("LOCK OFF")
         try:
@@ -49,7 +49,7 @@ def Operation(self):
             print(LOCK_OFF)
             print ("Lock Door is OFF")
         except Exception as e:
-            print("Error")
+            print(" ")
 
     # if user_input == 'a':
     #     print(getValue())

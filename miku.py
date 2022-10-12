@@ -8,6 +8,7 @@ import os
 import numpy as np
 import random
 from chat import *
+from facerecognition import *
 from serial_esp32 import *
 # from arduino_tools import *
 
@@ -71,7 +72,7 @@ def chatbot(inp):
 
 #main start here
 if __name__ == "__main__":
-    os.system("facerecognition.py")
+    face_recognition(1)
     wishMe()
     speak("I am ready master" + MASTER)
     speak("Hello my name is Hikaru Kaito, Can I help you master?")
@@ -195,7 +196,7 @@ if __name__ == "__main__":
         #open lock door selenoid
         elif "open lock door" in query.lower() or "open door" in query.lower():
             speak("Ok, master, Identifying your face...")
-            os.system("facerecognition.py")
+            face_recognition(2)
             Operation(3)
             time.sleep(5)
             Operation(4)
