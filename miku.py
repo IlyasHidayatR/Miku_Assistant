@@ -1,4 +1,4 @@
-import pyttsx3 #pip install di terminal
+import pyttsx3
 import speech_recognition as sr
 import datetime
 import wikipedia
@@ -7,9 +7,11 @@ import webbrowser
 import os
 import numpy as np
 import random
+import pyjokes
 from chat import *
 from facerecognition import *
 from serial_esp32 import *
+from masker import *
 # from arduino_tools import *
 
 
@@ -116,17 +118,17 @@ if __name__ == "__main__":
             url = "web.whatsapp.com"
             chrome_path = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
             webbrowser.get(chrome_path).open(url)
-        elif "google meet" in query.lower():
+        elif "google meet" in query.lower() or "meet" in query.lower():
             speak("Ok, master")
             url = "meet.google.com"
             chrome_path = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
             webbrowser.get(chrome_path).open(url)
-        elif "open mail" in query.lower():
+        elif "open mail" in query.lower() or "gmail" in query.lower():
             speak("Ok, master")
             url = "mail.google.com"
             chrome_path = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
             webbrowser.get(chrome_path).open(url)
-        elif "open drive" in query.lower():
+        elif "open drive" in query.lower() or "google drive" in query.lower():
             speak("Ok, master")
             url = "drive.google.com"
             chrome_path = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
@@ -138,7 +140,7 @@ if __name__ == "__main__":
             webbrowser.get(chrome_path).open(url)
         elif "mask face" in query.lower():
             speak("Ok, master")
-            os.system("python masker.py")
+            masker()
         elif "play music" in query.lower():
             speak("Ok, master")
             songs_dir = "C:\\Users\\Ilyas Hidayat Rusdy\\Music"
@@ -189,14 +191,38 @@ if __name__ == "__main__":
         elif "open cmd" in query.lower():
             speak("Ok, master")
             os.startfile("C:\\Windows\\System32\\cmd.exe")
+        #close cmd if it is open
+        elif "close cmd" in query.lower():
+            speak("Ok, master")
+            os.system("taskkill /f /im cmd.exe")
         #open notepad
         elif "open notepad" in query.lower():
             speak("Ok, master")
             os.startfile("C:\\Windows\\System32\\notepad.exe")
+        #make a note
+        elif "make a note" in query.lower():
+            speak("Ok, master, what should i write?")
+            note = takeCommand()
+            file = open("note.txt", "w")
+            speak("Should i include date and time?")
+            snfm = takeCommand()
+            if "yes" in snfm or "sure" in snfm:
+                strTime = datetime.datetime.now().strftime("%H:%M:%S")
+                file.write(strTime)
+                file.write(" :- ")
+                file.write(note)
+            else:
+                file.write(note)
+        #read a note
+        elif "read note" in query.lower() or "read my note" in query.lower():
+            speak("Ok, master")
+            file = open("note.txt", "r")
+            print(file.read())
+            speak(file.read(6))
         #open lock door selenoid
         elif "open lock door" in query.lower() or "open door" in query.lower():
             speak("Ok, master, Identifying your face...")
-            face_recognition(2)
+            face_recognition1(2)
             Operation(3)
             time.sleep(5)
             Operation(4)
@@ -210,6 +236,11 @@ if __name__ == "__main__":
             speak("Ok, master")
             Operation(2)
             speak("Lamp is off")
+        #give a joke
+        elif "tell me a joke" in query.lower() or "joke" in query.lower():
+            speak("Ok, master")
+            joke = pyjokes.get_joke()
+            speak(joke)
         #close aplication
         elif "close" in query.lower() or "exit" in query.lower():
             speak("Ok, master")
