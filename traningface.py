@@ -11,7 +11,7 @@ def getImagesWithLabels(path):
     ids = []
     for imagePath in imagePaths:
         pillImage = Image.open(imagePath).convert('L')
-        imageNp = np.array(pillImage, 'uint8')
+        imageNp = np.array(pillImage, 'uint8') 
         id = int(os.path.split(imagePath)[-1].split(".")[1])
         faces = detector.detectMultiScale(imageNp)
         for (x, y, w, h) in faces:

@@ -5,6 +5,11 @@ from PIL import Image
 import urllib.request
 import numpy as np
 
+
+faceDetections = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+recognizer = cv2.face.LBPHFaceRecognizer_create()
+recognizer.read('dataset/trainer.yml')
+
 #camera face
 def camera_face(cam):
     if cam == 1:
@@ -17,9 +22,6 @@ def camera_face(cam):
 def face_recognition(camera):
     global Condition
     video = cv2.VideoCapture(camera_face(camera), cv2.CAP_DSHOW)
-    faceDetections = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-    recognizer = cv2.face.LBPHFaceRecognizer_create()
-    recognizer.read('dataset/trainer.yml')
     a = 0
     while True:  
         a = a + 1
@@ -52,16 +54,13 @@ def face_recognition(camera):
 def face_recognition1(camera):
     global Condition
     url = camera_face(camera)
-    face_cascade=cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
     cv2.namedWindow("Face Recognition", cv2.WINDOW_NORMAL)
-    recognizer = cv2.face.LBPHFaceRecognizer_create()
-    recognizer.read('dataset/trainer.yml')
     while True:
         imgResp=urllib.request.urlopen(url)
         imgNp=np.array(bytearray(imgResp.read()),dtype=np.uint8)
         img=cv2.imdecode(imgNp,-1)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+        faces = faceDetections.detectMultiScale(gray, 1.3, 5)
         for (x,y,w,h) in faces:
             cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
             id, conf = recognizer.predict(gray[y:y+h, x:x+w])
