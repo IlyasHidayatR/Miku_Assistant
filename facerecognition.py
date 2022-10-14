@@ -4,6 +4,7 @@ from PIL import Image
 import urllib.request
 import numpy as np
 
+
 faceDetections = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('dataset/trainer.yml')
@@ -80,4 +81,4 @@ def face_recognition1(camera):
 # if __name__ == "__main__":
 #     face_recognition(1)
 #     print(id)
-# #     # face_recognition1(2)
+#     # face_recognition1(2)
