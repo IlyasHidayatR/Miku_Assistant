@@ -1,10 +1,8 @@
-from msilib.schema import Condition
 import cv2, time
 import os
 from PIL import Image
 import urllib.request
 import numpy as np
-
 
 faceDetections = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 recognizer = cv2.face.LBPHFaceRecognizer_create()
@@ -20,7 +18,7 @@ def camera_face(cam):
 
 #face recognition with camera cable
 def face_recognition(camera):
-    global Condition
+    global id
     video = cv2.VideoCapture(camera_face(camera), cv2.CAP_DSHOW)
     a = 0
     while True:  
@@ -33,16 +31,15 @@ def face_recognition(camera):
             id, conf = recognizer.predict(tampil[y:y+h, x:x+w])
             if id == 1:
                 id = "Ilyas Hidayat Rusdy"
-                Condition = 1
             else:
                 id = "Unknown"
-                Condition = 0
             cv2.putText(frame, str(id), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
         cv2.imshow("Face Recognition", frame)
         key = cv2.waitKey(1)
-        if Condition == 1:
+        if id == "Ilyas Hidayat Rusdy":
             time.sleep(1)
             print("Face recognized")
+            id = "open"
             break
         if key == ord('q'):
             break
@@ -52,7 +49,7 @@ def face_recognition(camera):
 
 #face recognition with camera wifi
 def face_recognition1(camera):
-    global Condition
+    global id
     url = camera_face(camera)
     cv2.namedWindow("Face Recognition", cv2.WINDOW_NORMAL)
     while True:
@@ -66,16 +63,15 @@ def face_recognition1(camera):
             id, conf = recognizer.predict(gray[y:y+h, x:x+w])
             if id == 1:
                 id = "Ilyas Hidayat Rusdy"
-                Condition = 1
             else:
                 id = "Unknown"
-                Condition = 0
             cv2.putText(img, str(id), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
         cv2.imshow('Face Recognition',img)
         key = cv2.waitKey(1)
-        if Condition == 1:
+        if id == "Ilyas Hidayat Rusdy":
             time.sleep(1)
             print("Face recognized")
+            id = "open"
             break
         if key == ord('q'):
             break
@@ -83,4 +79,5 @@ def face_recognition1(camera):
 
 # if __name__ == "__main__":
 #     face_recognition(1)
-#     # face_recognition1(2)
+#     print(id)
+# #     # face_recognition1(2)

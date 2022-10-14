@@ -8,6 +8,9 @@ import os
 import numpy as np
 import random
 import pyjokes
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 from chat import *
 from facerecognition import *
 from serial_esp32 import *
@@ -141,18 +144,18 @@ if __name__ == "__main__":
         elif "mask face" in query.lower():
             speak("Ok, master")
             masker()
-        elif "play music" in query.lower():
+        elif "play music" in query.lower() or "play song" in query.lower():
             speak("Ok, master")
             songs_dir = "C:\\Users\\Ilyas Hidayat Rusdy\\Music"
             songs = os.listdir(songs_dir)
             print(songs)
             os.startfile(os.path.join(songs_dir, songs[0]))
         #close music if it is playing
-        elif "stop music" in query.lower():
+        elif "stop music" in query.lower() or "close music" in query.lower():
             speak("Ok, master")
             os.system("pkill -9 mplayer")
         #next song if it is playing
-        elif "next song" in query.lower():
+        elif "next song" in query.lower() or "next music" in query.lower():
             speak("Ok, master")
             os.system("mpc next")
         #open microsoft office word
@@ -180,27 +183,48 @@ if __name__ == "__main__":
             speak("Ok, master")
             os.system("taskkill /f /im POWERPNT.EXE")
         #open file explorer
-        elif "open explorer" in query.lower():
+        elif "open explorer" in query.lower() or "open file explorer" in query.lower():
             speak("Ok, master")
             os.startfile("C:\\Users\\Ilyas Hidayat Rusdy\\Desktop\\")
         #close file explorer if it is open
-        elif "close explorer" in query.lower():
+        elif "close explorer" in query.lower() or "close file explorer" in query.lower():
             speak("Ok, master")
             os.system("taskkill /f /im explorer.exe")
         #open cmd
-        elif "open cmd" in query.lower():
+        elif "open cmd" in query.lower() or "open command prompt" in query.lower():
             speak("Ok, master")
             os.startfile("C:\\Windows\\System32\\cmd.exe")
         #close cmd if it is open
-        elif "close cmd" in query.lower():
+        elif "close cmd" in query.lower() or "close command prompt" in query.lower():
             speak("Ok, master")
             os.system("taskkill /f /im cmd.exe")
+        #open facebook
+        elif "open facebook" in query.lower() or "facebook" in query.lower():
+            speak("Ok, master, please ferify your face")
+            face_recognition(1)
+            # if id == "open":
+            speak("Welcome back, master")
+            #open facebook dan masukkan username dan password dengan selenium
+            driver = webdriver.Chrome()
+            driver.get("https://www.facebook.com/")
+            username = driver.find_element_by_id("email")
+            username.send_keys("ilyashidayatrusdy@yahoo.com")
+            password = driver.find_element_by_id("pass")
+            password.send_keys("16081999")
+            password.send_keys(Keys.RETURN)
+            # else:
+            #     speak("Sorry, you are not master")
+        #close facebook if it is open
+        elif "close facebook" in query.lower():
+            speak("Ok, master")
+            os.system("taskkill /f /im chrome.exe")
+            
         #open notepad
-        elif "open notepad" in query.lower():
+        elif "open notepad" in query.lower() or "open text editor" in query.lower():
             speak("Ok, master")
             os.startfile("C:\\Windows\\System32\\notepad.exe")
         #make a note
-        elif "make a note" in query.lower():
+        elif "make a note" in query.lower() or "make note" in query.lower():
             speak("Ok, master, what should i write?")
             note = takeCommand()
             file = open("note.txt", "w")
@@ -219,13 +243,41 @@ if __name__ == "__main__":
             file = open("note.txt", "r")
             print(file.read())
             speak(file.read(6))
+        #set an alarm
+        elif "set alarm" in query.lower() or "set an alarm" in query.lower():
+            speak("Ok, master, at what time should i set the alarm?")
+            alarm = takeCommand()
+            speak("What should i say when the alarm rings?")
+            alarmMessage = takeCommand()
+            speak("Alarm is set for " + alarm)
+            alarmHour = alarm.split(":")[0]
+            alarmMinute = alarm.split(":")[1]
+            while True:
+                if alarmHour == datetime.datetime.now().strftime("%H") and alarmMinute == datetime.datetime.now().strftime("%M"):
+                    print("Alarm is ringing")
+                    speak(alarmMessage)
+                    break
+        #calculate
+        # elif "calculate" in query.lower():
+        #     speak("Ok, master, what should i calculate?")
+        #     calc = takeCommand()
+        #     app_id = "W2J9X9-7X9Y8JWV7A"
+        #     client = wolframalpha.Client(app_id)
+        #     res = client.query(calc)
+        #     answer = next(res.results).text
+        #     print(answer)
+        #     speak(answer)
         #open lock door selenoid
         elif "open lock door" in query.lower() or "open door" in query.lower():
             speak("Ok, master, Identifying your face...")
-            face_recognition1(2)
+            face_recognition(1)
+            # if id == "open":
+            speak("Ok, master, opening the door")
             Operation(3)
             time.sleep(5)
             Operation(4)
+            # else:
+            #     speak("Sorry, Your face is not allowed to open the door")
         #on lampu
         elif "on the lamp" in query.lower() or "on" in query.lower():
             speak("Ok, master")
