@@ -8,6 +8,7 @@ import os
 import numpy as np
 import random
 import pyjokes
+import wolframalpha
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -218,7 +219,26 @@ if __name__ == "__main__":
         elif "close facebook" in query.lower():
             speak("Ok, master")
             os.system("taskkill /f /im chrome.exe")
-            
+        #open instagram
+        elif "open instagram" in query.lower() or "instagram" in query.lower():
+            speak("Ok, master, please ferify your face")
+            face_recognition(1)
+            # if id == "open":
+            speak("Welcome back, master")
+            #open instagram dan masukkan username dan password dengan selenium
+            driver = webdriver.Chrome()
+            driver.get("https://www.instagram.com/")
+            username = driver.find_element_by_name("username")
+            username.send_keys("ilyashidayatrusdy@yahoo.com")
+            password = driver.find_element_by_name("password")
+            password.send_keys("Il16081999")
+            password.send_keys(Keys.RETURN)
+            # else:
+            #     speak("Sorry, you are not master")
+        #close instagram if it is open
+        elif "close instagram" in query.lower():
+            speak("Ok, master")
+            os.system("taskkill /f /im chrome.exe")
         #open notepad
         elif "open notepad" in query.lower() or "open text editor" in query.lower():
             speak("Ok, master")
@@ -227,7 +247,7 @@ if __name__ == "__main__":
         elif "make a note" in query.lower() or "make note" in query.lower():
             speak("Ok, master, what should i write?")
             note = takeCommand()
-            file = open("note.txt", "w")
+            file = open("note/note.txt", "w")
             speak("Should i include date and time?")
             snfm = takeCommand()
             if "yes" in snfm or "sure" in snfm:
@@ -240,7 +260,7 @@ if __name__ == "__main__":
         #read a note
         elif "read note" in query.lower() or "read my note" in query.lower():
             speak("Ok, master")
-            file = open("note.txt", "r")
+            file = open("note/note.txt", "r")
             print(file.read())
             speak(file.read(6))
         #set an alarm
@@ -258,19 +278,19 @@ if __name__ == "__main__":
                     speak(alarmMessage)
                     break
         #calculate
-        # elif "calculate" in query.lower():
-        #     speak("Ok, master, what should i calculate?")
-        #     calc = takeCommand()
-        #     app_id = "W2J9X9-7X9Y8JWV7A"
-        #     client = wolframalpha.Client(app_id)
-        #     res = client.query(calc)
-        #     answer = next(res.results).text
-        #     print(answer)
-        #     speak(answer)
+        elif "calculate" in query.lower() or "calculate something" in query.lower():
+            speak("Ok, master, what should i calculate?")
+            calc = takeCommand()
+            app_id = "3R9RKJ-5EUG6R6K33"
+            client = wolframalpha.Client(app_id)
+            res = client.query(calc)
+            answer = next(res.results).text
+            print(answer)
+            speak(answer)
         #open lock door selenoid
         elif "open lock door" in query.lower() or "open door" in query.lower():
             speak("Ok, master, Identifying your face...")
-            face_recognition(1)
+            face_recognition1(2)
             # if id == "open":
             speak("Ok, master, opening the door")
             Operation(3)
