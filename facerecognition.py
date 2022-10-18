@@ -78,7 +78,7 @@ def face_recognition1(camera):
             break
     cv2.destroyAllWindows()
 
-# if __name__ == "__main__":
-#     face_recognition(1)
-#     print(id)
-#     # face_recognition1(2)
+if __name__ == "__main__":
+    face_recognition(1)
+    print(id)
+    # face_recognition1(2)
