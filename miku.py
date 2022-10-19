@@ -286,7 +286,7 @@ if __name__ == "__main__":
             res = client.query(calc)
             answer = next(res.results).text
             print(answer)
-            speak(answer)
+            speak("The answer is " + answer)
         #open lock door selenoid
         elif "open lock door" in query.lower() or "open door" in query.lower():
             speak("Ok, master, Identifying your face...")
