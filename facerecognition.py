@@ -32,6 +32,9 @@ def face_recognition(camera):
             id, conf = recognizer.predict(tampil[y:y+h, x:x+w])
             if id == 1:
                 id = "Ilyas Hidayat Rusdy"
+                #print confidance dalam persen
+                conf = "{0}%".format(round(conf-100))
+                print(conf)
             else:
                 id = "Unknown"
             cv2.putText(frame, str(id), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
@@ -58,12 +61,15 @@ def face_recognition1(camera):
         imgNp=np.array(bytearray(imgResp.read()),dtype=np.uint8)
         img=cv2.imdecode(imgNp,-1)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        faces = faceDetections.detectMultiScale(gray, 1.3, 5)
+        faces = faceDetections.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)
         for (x,y,w,h) in faces:
             cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
             id, conf = recognizer.predict(gray[y:y+h, x:x+w])
             if id == 1:
                 id = "Ilyas Hidayat Rusdy"
+                #print confidance dalam persen
+                conf = "{0}%".format(round(conf-100))
+                print(conf)
             else:
                 id = "Unknown"
             cv2.putText(img, str(id), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
@@ -79,6 +85,5 @@ def face_recognition1(camera):
     cv2.destroyAllWindows()
 
 # if __name__ == "__main__":
-#     face_recognition(1)
-#     print(id)
+#     # face_recognition(1)
 #     # face_recognition1(2)

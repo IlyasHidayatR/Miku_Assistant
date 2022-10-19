@@ -229,7 +229,7 @@ if __name__ == "__main__":
             driver = webdriver.Chrome()
             driver.get("https://www.instagram.com/")
             username = driver.find_element_by_name("username")
-            username.send_keys("ilyashidayatrusdy@yahoo.com")
+            username.send_keys("ilyashidayatrusdy@gmail.com")
             password = driver.find_element_by_name("password")
             password.send_keys("Il16081999")
             password.send_keys(Keys.RETURN)
