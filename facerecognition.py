@@ -33,7 +33,7 @@ def face_recognition(camera):
             if id == 1:
                 id = "Ilyas Hidayat Rusdy"
                 #print confidance dalam persen
-                conf = "{0}%".format(round(conf-100))
+                conf = "{0}%".format(round(100-conf))
                 print(conf)
             else:
                 id = "Unknown"
@@ -68,7 +68,7 @@ def face_recognition1(camera):
             if id == 1:
                 id = "Ilyas Hidayat Rusdy"
                 #print confidance dalam persen
-                conf = "{0}%".format(round(conf-100))
+                conf = "{0}%".format(round(100-conf))
                 print(conf)
             else:
                 id = "Unknown"
@@ -84,6 +84,6 @@ def face_recognition1(camera):
             break
     cv2.destroyAllWindows()
 
-# if __name__ == "__main__":
-#     # face_recognition(1)
-#     # face_recognition1(2)
+if __name__ == "__main__":
+    # face_recognition(1)
+    face_recognition1(2)

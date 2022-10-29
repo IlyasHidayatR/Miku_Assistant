@@ -9,6 +9,7 @@ import numpy as np
 import random
 import pyjokes
 import wolframalpha
+import pyautogui
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -17,6 +18,7 @@ from facerecognition import *
 from serial_esp32 import *
 from masker import *
 # from arduino_tools import *
+from FaceRecognition import FaceRecognition
 
 
 print ("initializing Hikaru Kaito")
@@ -78,10 +80,12 @@ def chatbot(inp):
 
 #main start here
 if __name__ == "__main__":
+    speak("Hello my name is Hikaru Kaito, a virtual assistant. Before we start, please verify your identity")
+    # FaceRecognition.face_recognition(1)
     face_recognition(1)
+    speak("Your identity has been verified")
     wishMe()
-    speak("I am ready master" + MASTER)
-    speak("Hello my name is Hikaru Kaito, Can I help you master?")
+    speak("Can I help you master" + MASTER + "?")
 
     #logic for tasks as command
     while True:
@@ -199,6 +203,31 @@ if __name__ == "__main__":
         elif "close cmd" in query.lower() or "close command prompt" in query.lower():
             speak("Ok, master")
             os.system("taskkill /f /im cmd.exe")
+        #open app in windows
+        elif "open app" in query.lower() or "open application" in query.lower():
+            speak("Ok, master. What app do you want to open?")
+            app = takeCommand()
+            #search app at search bar in windows and open it
+            pyautogui.hotkey("win", "s")
+            pyautogui.write(app)
+            #choose the first app in the list
+            pyautogui.press("enter")
+        #close app in windows
+        elif "close app" in query.lower() or "close application" in query.lower():
+            speak("Ok, master. What app do you want to close?")
+            app = takeCommand()
+            #search app at search bar in windows and close it
+            pyautogui.hotkey("win", "s")
+            pyautogui.write(app)
+            pyautogui.press("enter")
+            pyautogui.hotkey("alt", "f4")
+        #screen shot
+        elif "screen shot" in query.lower() or "screenshot" in query.lower():
+            speak("Ok, master")
+            #take screen shot
+            img = pyautogui.screenshot()
+            #save screen shot in picture folder
+            img.save("C:\\Users\\Ilyas Hidayat Rusdy\\Pictures\\screenshot.png")
         #open facebook
         elif "open facebook" in query.lower() or "facebook" in query.lower():
             speak("Ok, master, please ferify your face")
@@ -291,8 +320,9 @@ if __name__ == "__main__":
         elif "open lock door" in query.lower() or "open door" in query.lower():
             speak("Ok, master, Identifying your face...")
             face_recognition1(2)
+            # FaceRecognition.face_recognition1(2)
             # if id == "open":
-            speak("Ok, master, opening the door")
+            speak("Ok, master, opening the door for 5 seconds")
             Operation(3)
             time.sleep(5)
             Operation(4)
