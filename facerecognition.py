@@ -4,7 +4,6 @@ from PIL import Image
 import urllib.request
 import numpy as np
 
-
 faceDetections = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('dataset/trainer.yml')
@@ -46,7 +45,13 @@ def face_recognition(camera):
             id = "open"
             break
         if key == ord('q'):
-            break
+            #input password
+            password = input("Enter password: ")
+            if password == "123":
+                print("Password correct")
+                break
+            else:
+                print("Password incorrect")
     video.release()
     cv2.destroyAllWindows()
 
@@ -81,9 +86,16 @@ def face_recognition1(camera):
             id = "open"
             break
         if key == ord('q'):
-            break
+            #input password
+            password = input("Enter password: ")
+            if password == "123":
+                print("Password correct")
+                break
+            else:
+                print("Password incorrect")
     cv2.destroyAllWindows()
 
-if __name__ == "__main__":
-    # face_recognition(1)
-    face_recognition1(2)
+
+# if __name__ == "__main__":
+#     # face_recognition(1)
+#     # face_recognition1(2)

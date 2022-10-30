@@ -155,6 +155,21 @@ if __name__ == "__main__":
             songs = os.listdir(songs_dir)
             print(songs)
             os.startfile(os.path.join(songs_dir, songs[0]))
+        # hear music from youtube or local
+        elif "hear music" in query.lower() or "hear a music" in query.lower():
+            speak("Ok, master. Wheare do you want to hear music from? Youtube or local?")
+            query = takeCommand()
+            if "youtube" in query.lower():
+                speak("Ok, master. What is the music name?")
+                query = takeCommand()
+                pywhatkit.playonyt(query)
+            elif "local" in query.lower():
+                speak("Ok, master. What is the music name?")
+                query = takeCommand()
+                songs_dir = "C:\\Users\\Ilyas Hidayat Rusdy\\Music"
+                songs = os.listdir(songs_dir)
+                print(songs)
+                os.startfile(os.path.join(songs_dir, query))
         #close music if it is playing
         elif "stop music" in query.lower() or "close music" in query.lower():
             speak("Ok, master")
@@ -235,7 +250,7 @@ if __name__ == "__main__":
             # if id == "open":
             speak("Welcome back, master")
             #open facebook dan masukkan username dan password dengan selenium
-            driver = webdriver.Chrome()
+            driver = webdriver.Chrome(executable_path=r"C:\\chromedriver_win32\\chromedriver.exe")
             driver.get("https://www.facebook.com/")
             username = driver.find_element_by_id("email")
             username.send_keys("ilyashidayatrusdy@yahoo.com")
@@ -255,7 +270,7 @@ if __name__ == "__main__":
             # if id == "open":
             speak("Welcome back, master")
             #open instagram dan masukkan username dan password dengan selenium
-            driver = webdriver.Chrome()
+            driver = webdriver.Chrome(executable_path=r"C:\\chromedriver_win32\\chromedriver.exe")
             driver.get("https://www.instagram.com/")
             username = driver.find_element_by_name("username")
             username.send_keys("ilyashidayatrusdy@gmail.com")
@@ -319,15 +334,15 @@ if __name__ == "__main__":
         #open lock door selenoid
         elif "open lock door" in query.lower() or "open door" in query.lower():
             speak("Ok, master, Identifying your face...")
-            face_recognition1(2)
             # FaceRecognition.face_recognition1(2)
+            face_recognition1(2)
             # if id == "open":
             speak("Ok, master, opening the door for 5 seconds")
             Operation(3)
             time.sleep(5)
             Operation(4)
             # else:
-            #     speak("Sorry, Your face is not allowed to open the door")
+            #     speak("Sorry, You're not allowed to open the door")
         #on lampu
         elif "on the lamp" in query.lower() or "on" in query.lower():
             speak("Ok, master")

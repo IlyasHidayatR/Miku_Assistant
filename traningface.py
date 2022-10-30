@@ -18,6 +18,8 @@ def getImagesWithLabels(path):
             faceSamples.append(imageNp[y:y+h,x:x+w])
             ids.append(id)
     return faceSamples, ids
+print ("\n [INFO] Training faces. It will take a few seconds. Wait ...")
 faces, ids = getImagesWithLabels('dataset')
 recognizer.train(faces, np.array(ids))
-recognizer.save('dataset/trainer.yml')
+recognizer.write('dataset/trainer.yml')
+print("{0} faces trained. Exiting Program".format(len(np.unique(ids))))
