@@ -13,7 +13,7 @@ import pyautogui
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-# from chat import *
+from chat import *
 from facerecognition import *
 from serial_esp32 import *
 from masker import *
@@ -66,18 +66,18 @@ def takeCommand():
     return query
 
 #chatbot AI
-# def chatbot(inp):
-#     results = model.predict([bag_of_words(inp, words)])
-#     results_index = np.argmax(results)
-#     tag = labels[results_index]
+def chatbot(inp):
+    results = model.predict([bag_of_words(inp, words)])
+    results_index = np.argmax(results)
+    tag = labels[results_index]
 
-#     for tg in data["intents"]:
-#         if tg["tag"] == tag:
-#             responses = tg["responses"]
+    for tg in data["intents"]:
+        if tg["tag"] == tag:
+            responses = tg["responses"]
 
-#     out = random.choice(responses)
-#     print(out)
-#     speak(out)
+    out = random.choice(responses)
+    print(out)
+    speak(out)
 
 #main start here
 if __name__ == "__main__":
@@ -364,7 +364,7 @@ if __name__ == "__main__":
             speak("Ok, master")
             exit()
         #chat with Kaito
-        # elif "hikaru" in query.lower() or "kaito" in query.lower():
-        #     chatbot(query)
+        elif "hikaru" in query.lower() or "kaito" in query.lower():
+            chatbot(query)
         else:
             speak("sorry master, your order is not including my program")
