@@ -62,6 +62,7 @@ def takeCommand():
             print("say that again please")
             speak("say that again please")
             return "None"
+            
     query = query.lower()
     return query
 
@@ -307,7 +308,7 @@ if __name__ == "__main__":
             speak("Ok, master")
             file = open("note/note.txt", "r")
             print(file.read())
-            speak(file.read(6))
+            speak(file.read())
         #set an alarm
         elif "set alarm" in query.lower() or "set an alarm" in query.lower():
             speak("Ok, master, at what time should i set the alarm?")
@@ -315,8 +316,9 @@ if __name__ == "__main__":
             speak("What should i say when the alarm rings?")
             alarmMessage = takeCommand()
             speak("Alarm is set for " + alarm)
-            alarmHour = alarm.split(":")[0]
-            alarmMinute = alarm.split(":")[1]
+            alarmHour = int(alarm.split(":")[0])
+            alarmMinute = int(alarm.split(":")[1])
+            #set alarm
             while True:
                 if alarmHour == datetime.datetime.now().strftime("%H") and alarmMinute == datetime.datetime.now().strftime("%M"):
                     print("Alarm is ringing")
@@ -345,12 +347,12 @@ if __name__ == "__main__":
             # else:
             #     speak("Sorry, You're not allowed to open the door")
         #on lampu
-        elif "on the lamp" in query.lower() or "on" in query.lower():
+        elif "on the lamp" in query.lower() or "on the light" in query.lower():
             speak("Ok, master")
             Operation(1)
             speak("Lamp is on")
         #off lampu
-        elif "off the lamp" in query.lower() or "off" in query.lower():
+        elif "off the lamp" in query.lower() or "off the light" in query.lower():
             speak("Ok, master")
             Operation(2)
             speak("Lamp is off")
@@ -363,6 +365,18 @@ if __name__ == "__main__":
         elif "close" in query.lower() or "exit" in query.lower():
             speak("Ok, master")
             exit()
+        #Shutdown
+        elif "shutdown" in query.lower() or "shut down" in query.lower():
+            speak("Ok, master")
+            os.system("shutdown /s /t 1")
+        #Restart
+        elif "restart" in query.lower() or "reboot" in query.lower():
+            speak("Ok, master")
+            os.system("shutdown /r /t 1")
+        #Sleep
+        elif "sleep" in query.lower() or "hibernate" in query.lower():
+            speak("Ok, master")
+            os.system("shutdown /h")
         #chat with Kaito
         elif "hikaru" in query.lower() or "kaito" in query.lower():
             chatbot(query)

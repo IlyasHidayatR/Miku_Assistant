@@ -97,5 +97,5 @@ def face_recognition1(camera):
 
 
 # if __name__ == "__main__":
-#     # face_recognition(1)
-#     # face_recognition1(2)
+    # face_recognition(1)
+    # face_recognition1(2)
