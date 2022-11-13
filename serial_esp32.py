@@ -12,7 +12,6 @@ Elektronik = ["http://192.168.43.72/LED=ON", "http://192.168.43.72/LED=OFF", "ht
 #     data_serial.write(b'1')
 #     data = data_serial.readline().decode('ascii')
 #     return data
-
 def Operation(self):
     # user_input = self
     if self == 1:

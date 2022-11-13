@@ -17,6 +17,8 @@ from chat import *
 from facerecognition import *
 from serial_esp32 import *
 from masker import *
+from recordface import *
+from traningface import *
 # from arduino_tools import *
 from FaceRecognition import FaceRecognition
 
@@ -61,7 +63,6 @@ def takeCommand():
         except Exception as e:
             print("say that again please")
             speak("say that again please")
-            return "None"
             
     query = query.lower()
     return query
@@ -245,6 +246,28 @@ if __name__ == "__main__":
             img = pyautogui.screenshot()
             #save screen shot in picture folder
             img.save("C:\\Users\\Ilyas Hidayat Rusdy\\Pictures\\screenshot.png")
+        #volume up
+        elif "volume up" in query.lower():
+            speak("Ok, master. How much do you want to increase the volume?")
+            volume = takeCommand()
+            #increase volume
+            pyautogui.hotkey("volumeup", volume)
+        #volume down
+        elif "volume down" in query.lower():
+            speak("Ok, master. How much do you want to decrease the volume?")
+            volume = takeCommand()
+            #decrease volume
+            pyautogui.hotkey("volumedown", volume)
+        #mute volume
+        elif "mute volume" in query.lower():
+            speak("Ok, master")
+            #mute volume
+            pyautogui.hotkey("volumemute")
+        #unmute volume
+        elif "unmute volume" in query.lower():
+            speak("Ok, master")
+            #unmute volume
+            pyautogui.hotkey("volumemute")
         #open facebook
         elif "open facebook" in query.lower() or "facebook" in query.lower():
             speak("Ok, master, please ferify your face")
@@ -289,6 +312,30 @@ if __name__ == "__main__":
         elif "open notepad" in query.lower() or "open text editor" in query.lower():
             speak("Ok, master")
             os.startfile("C:\\Windows\\System32\\notepad.exe")
+        #close notepad if it is open
+        elif "close notepad" in query.lower() or "close text editor" in query.lower():
+            speak("Ok, master")
+            os.system("taskkill /f /im notepad.exe")
+        #regitraion face
+        elif "registration face" in query.lower() or "register face" in query.lower():
+            speak("Ok, master. Before you register new face, please ferify your face master")
+            face_recognition(1)
+            # if id == "open":
+            speak("Welcome back, master. Please look at the camera and create new ID face")
+            try:
+                record_face()
+                if valid == 1:
+                    TrainingFace()
+                    print("Face registration success")
+                    speak("Face registration success")
+                else:
+                    print("Face registration failed")
+                    speak("Face registration failed")
+            except:
+                print("Face registration failed")
+                speak("Face registration failed")
+            # else:
+            #     speak("Sorry, you are not master")
         #make a note
         elif "make a note" in query.lower() or "make note" in query.lower():
             speak("Ok, master, what should i write?")
@@ -307,8 +354,13 @@ if __name__ == "__main__":
         elif "read note" in query.lower() or "read my note" in query.lower():
             speak("Ok, master")
             file = open("note/note.txt", "r")
-            print(file.read())
-            speak(file.read())
+            # if note is empty
+            if os.stat("note/note.txt").st_size == 0:
+                speak("You have no note")
+            else:
+                note = file.read()
+                speak(note)
+                print(note)
         #set an alarm
         elif "set alarm" in query.lower() or "set an alarm" in query.lower():
             speak("Ok, master, at what time should i set the alarm?")

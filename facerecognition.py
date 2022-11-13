@@ -18,7 +18,7 @@ def camera_face(cam):
 
 #face recognition with camera cable
 def face_recognition(camera):
-    global id
+    global id, conf
     video = cv2.VideoCapture(camera_face(camera), cv2.CAP_DSHOW)
     a = 0
     while True:  
@@ -32,7 +32,7 @@ def face_recognition(camera):
             if id == 1:
                 id = "Ilyas Hidayat Rusdy"
                 #print confidance dalam persen
-                conf = "{0}%".format(round(100-conf))
+                conf = "{0}%".format(round(conf))
                 print(conf)
             else:
                 id = "Unknown"
@@ -58,7 +58,7 @@ def face_recognition(camera):
 
 #face recognition with camera wifi
 def face_recognition1(camera):
-    global id
+    global id, conf
     url = camera_face(camera)
     cv2.namedWindow("Face Recognition", cv2.WINDOW_NORMAL)
     while True:
@@ -70,17 +70,18 @@ def face_recognition1(camera):
         for (x,y,w,h) in faces:
             cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
             id, conf = recognizer.predict(gray[y:y+h, x:x+w])
-            if id == 1:
-                id = "Ilyas Hidayat Rusdy"
+            #if id is already in the database and the confidence is greater than 50 then print the face recognized
+            if id == 1 or id == 2 or id == 3 or id == 4 or id == 5 or id == 6:
+                id = "face recognized"
                 #print confidance dalam persen
-                conf = "{0}%".format(round(100-conf))
+                conf = "{0}%".format(round(conf))
                 print(conf)
             else:
                 id = "Unknown"
             cv2.putText(img, str(id), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
         cv2.imshow('Face Recognition',img)
         key = cv2.waitKey(1)
-        if id == "Ilyas Hidayat Rusdy":
+        if id == "face recognized":
             time.sleep(1)
             print("Face recognized")
             id = "open"
@@ -97,5 +98,5 @@ def face_recognition1(camera):
 
 
 # if __name__ == "__main__":
-    # face_recognition(1)
-    # face_recognition1(2)
+#     # face_recognition(1)
+#     # face_recognition1(2)
