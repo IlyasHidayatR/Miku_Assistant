@@ -247,24 +247,24 @@ if __name__ == "__main__":
             #save screen shot in picture folder
             img.save("C:\\Users\\Ilyas Hidayat Rusdy\\Pictures\\screenshot.png")
         #volume up
-        elif "volume up" in query.lower():
+        elif "volume up" in query.lower() or "increase volume" in query.lower():
             speak("Ok, master. How much do you want to increase the volume?")
             volume = takeCommand()
             #increase volume
             pyautogui.hotkey("volumeup", volume)
         #volume down
-        elif "volume down" in query.lower():
+        elif "volume down" in query.lower() or "decrease volume" in query.lower():
             speak("Ok, master. How much do you want to decrease the volume?")
             volume = takeCommand()
             #decrease volume
             pyautogui.hotkey("volumedown", volume)
         #mute volume
-        elif "mute volume" in query.lower():
+        elif "mute volume" in query.lower() or "mute" in query.lower():
             speak("Ok, master")
             #mute volume
             pyautogui.hotkey("volumemute")
         #unmute volume
-        elif "unmute volume" in query.lower():
+        elif "unmute volume" in query.lower() or "unmute" in query.lower():
             speak("Ok, master")
             #unmute volume
             pyautogui.hotkey("volumemute")
@@ -326,8 +326,8 @@ if __name__ == "__main__":
                 record_face()
                 if valid == 1:
                     TrainingFace()
-                    print("Face registration success")
-                    speak("Face registration success")
+                    print("Face registration success. If you want the new face to be used, please add the new face ID and name in the variable recognize_ID at facerecognition.py")
+                    speak("Face registration success. If you want the new face to be used, please add the new face ID and name in the variable recognize_ID at facerecognition.py")
                 else:
                     print("Face registration failed")
                     speak("Face registration failed")
@@ -392,7 +392,7 @@ if __name__ == "__main__":
             # FaceRecognition.face_recognition1(2)
             face_recognition1(2)
             # if id == "open":
-            speak("Ok, master, opening the door for 5 seconds")
+            speak("Ok, master. Opening the door for 5 seconds")
             Operation(3)
             time.sleep(5)
             Operation(4)

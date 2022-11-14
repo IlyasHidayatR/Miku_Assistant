@@ -25,9 +25,10 @@ def record_face():
                     break
             video.release()
             cv2.destroyAllWindows()
-        if os.path.exists('dataset/User.' + str(id) + '.1.jpg'):
+        elif os.path.exists('dataset/User.' + str(id) + '.1.jpg'):
             valid = 0
             print("ID already exist")
+            exit()
     except:
         valid = 0
         print("Error")

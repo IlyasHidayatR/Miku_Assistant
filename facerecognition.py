@@ -8,6 +8,14 @@ faceDetections = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('dataset/trainer.yml')
 
+#dictionary ID and name of the person for face recognition with camera wifi
+recognize_ID = {1: "Ilyas Hidayat Rusdy", 
+                2: "Dika Priyatna", 
+                3: "Diksa Sukma Dinata", 
+                4: "Agung Wicaksana", 
+                5: "Sindu", 
+                6: "Pak Resika Arthana"}
+
 #camera face
 def camera_face(cam):
     if cam == 1:
@@ -19,6 +27,7 @@ def camera_face(cam):
 #face recognition with camera cable
 def face_recognition(camera):
     global id, conf
+    valid = False
     video = cv2.VideoCapture(camera_face(camera), cv2.CAP_DSHOW)
     a = 0
     while True:  
@@ -29,8 +38,10 @@ def face_recognition(camera):
         for (x, y, w, h) in faces:
             cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
             id, conf = recognizer.predict(tampil[y:y+h, x:x+w])
-            if id == 1:
+            #face recognition of owners
+            if id == 1 and conf > 80.0:
                 id = "Ilyas Hidayat Rusdy"
+                valid = True
                 #print confidance dalam persen
                 conf = "{0}%".format(round(conf))
                 print(conf)
@@ -39,10 +50,10 @@ def face_recognition(camera):
             cv2.putText(frame, str(id), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
         cv2.imshow("Face Recognition", frame)
         key = cv2.waitKey(1)
-        if id == "Ilyas Hidayat Rusdy":
+        if valid == True:
             time.sleep(1)
             print("Face recognized")
-            id = "open"
+            valid = False
             break
         if key == ord('q'):
             #input password
@@ -59,6 +70,7 @@ def face_recognition(camera):
 #face recognition with camera wifi
 def face_recognition1(camera):
     global id, conf
+    valid = False
     url = camera_face(camera)
     cv2.namedWindow("Face Recognition", cv2.WINDOW_NORMAL)
     while True:
@@ -71,8 +83,9 @@ def face_recognition1(camera):
             cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
             id, conf = recognizer.predict(gray[y:y+h, x:x+w])
             #if id is already in the database and the confidence is greater than 50 then print the face recognized
-            if id == 1 or id == 2 or id == 3 or id == 4 or id == 5 or id == 6:
-                id = "face recognized"
+            if id in recognize_ID and conf > 80.0:
+                id = recognize_ID[id]
+                valid = True
                 #print confidance dalam persen
                 conf = "{0}%".format(round(conf))
                 print(conf)
@@ -81,10 +94,10 @@ def face_recognition1(camera):
             cv2.putText(img, str(id), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
         cv2.imshow('Face Recognition',img)
         key = cv2.waitKey(1)
-        if id == "face recognized":
+        if valid == True:
             time.sleep(1)
             print("Face recognized")
-            id = "open"
+            valid = False
             break
         if key == ord('q'):
             #input password
