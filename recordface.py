@@ -3,6 +3,7 @@ import cv2, os, time
 #record face
 def record_face():
     global valid
+    valid = 0
     camera = 0
     video = cv2.VideoCapture(camera, cv2.CAP_DSHOW)
     faceDetections = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
@@ -37,6 +38,6 @@ def record_face():
         
 
 #main
-# if __name__ == "__main__":
-#     record_face()
-#     print(valid)
+if __name__ == "__main__":
+    record_face()
+    print(valid)

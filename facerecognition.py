@@ -14,14 +14,15 @@ recognize_ID = {1: "Ilyas Hidayat Rusdy",
                 3: "Diksa Sukma Dinata", 
                 4: "Agung Wicaksana", 
                 5: "Sindu", 
-                6: "Pak Resika Arthana"}
+                6: "Pak Resika Arthana",
+                7: "Acep Taufik Hidayat"}
 
 #camera face
 def camera_face(cam):
     if cam == 1:
         camera = 0
     elif cam == 2:
-        camera = "http://192.168.43.95/800x600.jpg"
+        camera = "http://192.168.43.95/1024x768.jpg"
     return camera
 
 #face recognition with camera cable
@@ -44,7 +45,7 @@ def face_recognition(camera):
                 valid = True
                 #print confidance dalam persen
                 conf = "{0}%".format(round(conf))
-                print(conf)
+                print(id + " " + "("+conf+")")
             else:
                 id = "Unknown"
             cv2.putText(frame, str(id), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
@@ -62,7 +63,7 @@ def face_recognition(camera):
                 print("Password correct")
                 break
             else:
-                print("Password incorrect")
+                print("Password incorrect. Please verify with correctly face or restart the program")
     video.release()
     cv2.destroyAllWindows()
 
@@ -88,7 +89,7 @@ def face_recognition1(camera):
                 valid = True
                 #print confidance dalam persen
                 conf = "{0}%".format(round(conf))
-                print(conf)
+                print(id + " " + "("+conf+")")
             else:
                 id = "Unknown"
             cv2.putText(img, str(id), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
@@ -106,10 +107,32 @@ def face_recognition1(camera):
                 print("Password correct")
                 break
             else:
-                print("Password incorrect")
+                print("Password incorrect. Please verify with correctly face or restart the program")
     cv2.destroyAllWindows()
 
 
 # if __name__ == "__main__":
-#     # face_recognition(1)
-#     # face_recognition1(2)
+#     while True:
+#         print("1. Face Recognition with Camera Cable")
+#         print("2. Face Recognition with Camera Wifi")
+#         print("3. Exit")
+#         pilihan = int(input("Choose the camera: "))
+#         if pilihan == 1:
+#             #start time
+#             start = time.time()
+#             face_recognition(1)
+#             #end time
+#             end = time.time()
+#             print("Time: ", end - start)
+#         elif pilihan == 2:
+#             #start time
+#             start = time.time()
+#             face_recognition1(2)
+#             #end time
+#             end = time.time()
+#             #print time
+#             print("Time: ", end - start)
+#         elif pilihan == 3:
+#             break
+#         else:
+#             print("Please choose the correct camera")

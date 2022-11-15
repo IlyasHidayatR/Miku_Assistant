@@ -63,6 +63,7 @@ def takeCommand():
         except Exception as e:
             print("say that again please")
             speak("say that again please")
+            return "None"
             
     query = query.lower()
     return query
@@ -326,8 +327,8 @@ if __name__ == "__main__":
                 record_face()
                 if valid == 1:
                     TrainingFace()
-                    print("Face registration success. If you want the new face to be used, please add the new face ID and name in the variable recognize_ID at facerecognition.py")
-                    speak("Face registration success. If you want the new face to be used, please add the new face ID and name in the variable recognize_ID at facerecognition.py")
+                    print("Face registration success. If you want the new face to be used, please add the new face ID and name in the variable recognize_ID at facerecognition.py and restart the program")
+                    speak("Face registration success. If you want the new face to be used, please add the new face ID and name in the variable recognize_ID at facerecognition.py and restart the program")
                 else:
                     print("Face registration failed")
                     speak("Face registration failed")
@@ -432,5 +433,7 @@ if __name__ == "__main__":
         #chat with Kaito
         elif "hikaru" in query.lower() or "kaito" in query.lower():
             chatbot(query)
+        elif "None" in query.lower():
+            speak("Sorry, i didn't get that")
         else:
             speak("sorry master, your order is not including my program")
