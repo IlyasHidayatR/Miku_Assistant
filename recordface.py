@@ -38,6 +38,6 @@ def record_face():
         
 
 #main
-if __name__ == "__main__":
-    record_face()
-    print(valid)
+# if __name__ == "__main__":
+#     record_face()
+#     print(valid)
