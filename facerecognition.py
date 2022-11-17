@@ -10,11 +10,10 @@ recognizer.read('dataset/trainer.yml')
 
 #dictionary ID and name of the person for face recognition with camera wifi
 recognize_ID = {1: "Ilyas Hidayat Rusdy", 
-                2: "Dika Priyatna", 
-                3: "Diksa Sukma Dinata", 
+                10: "Anisza", 
                 4: "Agung Wicaksana", 
-                5: "Sindu", 
-                6: "Pak Resika Arthana",
+                8: "Meirli",
+                9: "Zahra",
                 7: "Acep Taufik Hidayat"}
 
 #camera face
@@ -40,7 +39,7 @@ def face_recognition(camera):
             cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
             id, conf = recognizer.predict(tampil[y:y+h, x:x+w])
             #face recognition of owners
-            if id == 1 and conf > 80.0:
+            if id == 1 and conf < 100:
                 id = "Ilyas Hidayat Rusdy"
                 valid = True
                 #print confidance dalam persen
@@ -84,7 +83,7 @@ def face_recognition1(camera):
             cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
             id, conf = recognizer.predict(gray[y:y+h, x:x+w])
             #if id is already in the database and the confidence is greater than 50 then print the face recognized
-            if id in recognize_ID and conf > 80.0:
+            if id in recognize_ID and conf < 100:
                 id = recognize_ID[id]
                 valid = True
                 #print confidance dalam persen
