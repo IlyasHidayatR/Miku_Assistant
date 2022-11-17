@@ -10,11 +10,11 @@ recognizer.read('dataset/trainer.yml')
 
 #dictionary ID and name of the person for face recognition with camera wifi
 recognize_ID = {1: "Ilyas Hidayat Rusdy", 
-                10: "Anisza", 
                 4: "Agung Wicaksana", 
                 8: "Meirli",
                 9: "Zahra",
-                7: "Acep Taufik Hidayat"}
+                7: "Acep Taufik Hidayat",
+                10: "Anisza"}
 
 #camera face
 def camera_face(cam):
@@ -43,7 +43,7 @@ def face_recognition(camera):
                 id = "Ilyas Hidayat Rusdy"
                 valid = True
                 #print confidance dalam persen
-                conf = "{0}%".format(round(conf))
+                conf = "{0}%".format(round(100-conf))
                 print(id + " " + "("+conf+")")
             else:
                 id = "Unknown"
@@ -87,7 +87,7 @@ def face_recognition1(camera):
                 id = recognize_ID[id]
                 valid = True
                 #print confidance dalam persen
-                conf = "{0}%".format(round(conf))
+                conf = "{0}%".format(round(100-conf))
                 print(id + " " + "("+conf+")")
             else:
                 id = "Unknown"

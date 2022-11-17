@@ -11,8 +11,7 @@ import pyjokes
 import wolframalpha
 import pyautogui
 import tkinter as tk
-import threading
-import sys
+from PIL import ImageTk, Image
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -84,18 +83,6 @@ def chatbot(inp):
     out = random.choice(responses)
     print(out)
     speak(out)
-
-#gui tkinter
-screen_main = tk.Tk()
-screen_main.configure(bg="black")
-screen_main.attributes("-fullscreen", True)
-
-def color_change():
-    color = ["red", "blue", "green", "yellow", "orange", "purple", "pink"]
-    actual_color = random.choice(color)
-    label.configure(fg=actual_color)
-    label.after(100, color_change)
-
 
 def main():
         speak("Hello my name is Hikaru Kaito, a virtual assistant. Before we start, please verify your identity")
@@ -452,15 +439,39 @@ def main():
             else:
                 speak("sorry master, your order is not including my program")
 
+
 if __name__ == "__main__":
 
-    initiate = tk.Button(screen_main, text="Start", font=('space age', 20), foreground='cyan', background='black', command=main)
-    #position of button initiate in center
-    initiate.place(x=200, y=200)
+    #run main function with screen_main
+    screen_main = tk.Tk()
+    screen_main.title("Kaito")
+    screen_main.geometry("500x500")
+    screen_main.configure(background="black")
+    screen_main.resizable(False, False)
+    #create a label
+    tk.Label(screen_main, text="Hikaru Kaito", bg="black", fg="white", font=("Calibri", 30)).pack()
+    tk.Label(screen_main, text="Your Personal Assistant", bg="black", fg="white", font=("Calibri", 15)).pack()
+    tk.Label(screen_main, text="", bg="black").pack()
+    #create a button
+    tk.Button(screen_main, text="Start", width=10, height=1, command=main).pack()
+    #start gif animation image
+    openImage = Image.open("Kaito.gif")
 
-    label = tk.Label(screen_main, text="Hikaru Kaito", font=("space age", 50), bg="black", fg="white")
-    color_change()
-    #position label in the center
-    label.pack(expand=True)
+    frame = openImage.n_frames
+    frames = [tk.PhotoImage(file="Kaito.gif", format="gif -index %i" %(i)) for i in range(frame)]
+    ind = 0
+    showImage = None
+    def update(ind):
+        global showImage
+        frame = frames[ind]
+        ind += 1
+        label.configure(image=frame)
+        if ind == frame:
+            ind = 0
+        showImage = screen_main.after(100, update, ind)
+    label = tk.Label(screen_main, bg="black")
+    label.pack()
+    screen_main.after(0, update, 0)
+    screen_main.mainloop()
 
     screen_main.mainloop()
