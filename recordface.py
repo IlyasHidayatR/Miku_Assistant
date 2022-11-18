@@ -1,4 +1,5 @@
 import cv2, os, time
+import tkinter as tk
 
 #record face
 def record_face():
@@ -7,7 +8,23 @@ def record_face():
     camera = 0
     video = cv2.VideoCapture(camera, cv2.CAP_DSHOW)
     faceDetections = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-    id = int(input("Enter ID: "))
+    #input ID with tkinter GUI and convert to string
+    screen_form = tk.Tk()
+    screen_form.title("Form")
+    screen_form.geometry("300x200")
+    screen_form.configure(background="white")
+    label = tk.Label(screen_form, text="Enter ID", bg="white", fg="black", font=("Arial", 15))
+    label.pack()
+    entry = tk.Entry(screen_form, width=30)
+    entry.pack()
+    def save():
+        global valid
+        valid = entry.get()
+        screen_form.destroy()
+    button = tk.Button(screen_form, text="Save", command=save)
+    button.pack()
+    screen_form.mainloop()
+    id = str(valid)
     try:
         #if id not exist in dataset
         if not os.path.exists('dataset/User.' + str(id) + '.1.jpg'):

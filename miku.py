@@ -15,7 +15,7 @@ from PIL import ImageTk, Image
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from chat import *
+# from chat import *
 from facerecognition import *
 from serial_esp32 import *
 from masker import *
@@ -71,18 +71,18 @@ def takeCommand():
     return query
 
 # chatbot AI
-def chatbot(inp):
-    results = model.predict([bag_of_words(inp, words)])
-    results_index = np.argmax(results)
-    tag = labels[results_index]
+# def chatbot(inp):
+#     results = model.predict([bag_of_words(inp, words)])
+#     results_index = np.argmax(results)
+#     tag = labels[results_index]
 
-    for tg in data["intents"]:
-        if tg["tag"] == tag:
-            responses = tg["responses"]
+#     for tg in data["intents"]:
+#         if tg["tag"] == tag:
+#             responses = tg["responses"]
 
-    out = random.choice(responses)
-    print(out)
-    speak(out)
+#     out = random.choice(responses)
+#     print(out)
+#     speak(out)
 
 def main():
         speak("Hello my name is Hikaru Kaito, a virtual assistant. Before we start, please verify your identity")
@@ -432,8 +432,8 @@ def main():
                 speak("Ok, master")
                 os.system("shutdown /h")
             #chat with Kaito
-            elif "hikaru" in query.lower() or "kaito" in query.lower():
-                chatbot(query)
+            # elif "hikaru" in query.lower() or "kaito" in query.lower():
+            #     chatbot(query)
             elif "none" in query.lower():
                 speak("Sorry, i didn't get that")
             else:
@@ -458,8 +458,8 @@ if __name__ == "__main__":
     openImage = Image.open("Kaito.gif")
 
     frame = openImage.n_frames
-    frames = [tk.PhotoImage(file="Kaito.gif", format="gif -index %i" %(i)) for i in range(frame)]
-    ind = 0
+    frames = [tk.PhotoImage(file="Kaito.gif", format=f"gif -index {i}") for i in range(frame)]
+    ind = 1
     showImage = None
     def update(ind):
         global showImage
@@ -467,11 +467,10 @@ if __name__ == "__main__":
         ind += 1
         label.configure(image=frame)
         if ind == frame:
-            ind = 0
-        showImage = screen_main.after(100, update, ind)
+            ind = 1
+        showImage = screen_main.after(50, lambda: update(ind))
+        return showImage
     label = tk.Label(screen_main, bg="black")
     label.pack()
-    screen_main.after(0, update, 0)
-    screen_main.mainloop()
-
+    screen_main.after(1, lambda: update(ind))
     screen_main.mainloop()

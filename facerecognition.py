@@ -3,6 +3,7 @@ import os
 from PIL import Image
 import urllib.request
 import numpy as np
+import tkinter as tk
 
 faceDetections = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 recognizer = cv2.face.LBPHFaceRecognizer_create()
@@ -56,13 +57,25 @@ def face_recognition(camera):
             valid = False
             break
         if key == ord('q'):
-            #input password
-            password = input("Enter password: ")
-            if password == "123":
-                print("Password correct")
-                break
-            else:
-                print("Password incorrect. Please verify with correctly face or restart the program")
+            #input password with GUI tkinter
+            root = tk.Tk()
+            root.title("Password")
+            root.geometry("300x200")
+            root.resizable(False, False)
+            label = tk.Label(root, text="Enter password: ")
+            label.pack()
+            entry = tk.Entry(root, show="*")
+            entry.pack()
+            def check():
+                if entry.get() == "123":
+                    print("Password correct")
+                    root.destroy()
+                else:
+                    print("Password incorrect. Please verify with correctly face or restart the program")
+            button = tk.Button(root, text="Enter", command=check)
+            button.pack()
+            root.mainloop()
+            break
     video.release()
     cv2.destroyAllWindows()
 
@@ -100,13 +113,25 @@ def face_recognition1(camera):
             valid = False
             break
         if key == ord('q'):
-            #input password
-            password = input("Enter password: ")
-            if password == "123":
-                print("Password correct")
-                break
-            else:
-                print("Password incorrect. Please verify with correctly face or restart the program")
+            #input password with GUI tkinter
+            root = tk.Tk()
+            root.title("Password")
+            root.geometry("300x200")
+            root.resizable(False, False)
+            label = tk.Label(root, text="Enter password: ")
+            label.pack()
+            entry = tk.Entry(root, show="*")
+            entry.pack()
+            def check():
+                if entry.get() == "123":
+                    print("Password correct")
+                    root.destroy()
+                else:
+                    print("Password incorrect. Please verify with correctly face or restart the program")
+            button = tk.Button(root, text="Enter", command=check)
+            button.pack()
+            root.mainloop()
+            break
     cv2.destroyAllWindows()
 
 
