@@ -11,7 +11,6 @@ import pyjokes
 import wolframalpha
 import pyautogui
 import tkinter as tk
-from PIL import ImageTk, Image
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
