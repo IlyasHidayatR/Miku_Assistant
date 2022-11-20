@@ -27,7 +27,7 @@ def record_face():
     id = str(valid)
     try:
         #if id not exist in dataset
-        if not os.path.exists('dataset/User.' + str(id) + '.1.jpg'):
+        if not os.path.exists('dataset/User.' + str(id) + '.1.jpg') and id != "":
             valid = 1
             a = 0
             while True:

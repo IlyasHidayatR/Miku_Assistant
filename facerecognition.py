@@ -72,6 +72,7 @@ def face_recognition(camera):
                     root.destroy()
                 else:
                     print("Password incorrect. Please verify with correctly face or restart the program")
+                    exit()
             button = tk.Button(root, text="Enter", command=check)
             button.pack()
             root.mainloop()
@@ -128,6 +129,7 @@ def face_recognition1(camera):
                     root.destroy()
                 else:
                     print("Password incorrect. Please verify with correctly face or restart the program")
+                    exit()
             button = tk.Button(root, text="Enter", command=check)
             button.pack()
             root.mainloop()
