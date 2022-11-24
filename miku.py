@@ -108,6 +108,11 @@ def main():
             url = "youtube.com"
             chrome_path = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
             webbrowser.get(chrome_path).open(url)
+        elif "open google" in query.lower():
+            speak("Ok, master")
+            url = "google.com"
+            chrome_path = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
+            webbrowser.get(chrome_path).open(url)
         elif "google" in query.lower():
             speak("Ok master, searching google...")
             pywhatkit.search(query.replace("google", ""))
@@ -143,11 +148,6 @@ def main():
         elif "open drive" in query.lower() or "google drive" in query.lower():
             speak("Ok, master")
             url = "drive.google.com"
-            chrome_path = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
-            webbrowser.get(chrome_path).open(url)
-        elif "open google" in query.lower():
-            speak("Ok, master")
-            url = "google.com"
             chrome_path = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
             webbrowser.get(chrome_path).open(url)
         elif "mask face" in query.lower():
@@ -393,6 +393,21 @@ def main():
                     print("Alarm is ringing")
                     speak(alarmMessage)
                     break
+        #set timer
+        elif "set timer" in query.lower() or "set a timer" in query.lower():
+            speak("Ok, master, for how many minutes should i set the timer?")
+            timer = takeCommand()
+            speak("Timer is set for " + timer + " minutes")
+            timerMinute = int(timer)
+            #set timer
+            while True:
+                if timerMinute == 0:
+                    print("Timer is up")
+                    speak("Timer is up")
+                    break
+                else:
+                    timerMinute -= 1
+                    time.sleep(60)
         #calculate
         elif "calculate" in query.lower() or "calculate something" in query.lower():
             speak("Ok, master, what should i calculate?")
@@ -404,7 +419,7 @@ def main():
             print(answer)
             speak("The answer is " + answer)
         #open lock door selenoid
-        elif "open lock door" in query.lower() or "open door" in query.lower():
+        elif "open the door" in query.lower() or "open door" in query.lower():
             speak("Ok, master, Identifying your face...")
             # FaceRecognition.face_recognition1(2)
             face_recognition1(2)
@@ -473,19 +488,16 @@ if __name__ == "__main__":
     openImage = Image.open("Kaito.gif")
 
     frame = openImage.n_frames
-    frames = [tk.PhotoImage(file="Kaito.gif", format=f"gif -index {i}") for i in range(frame)]
-    ind = 1
-    showImage = None
+    animation = [tk.PhotoImage(file="Kaito.gif", format=f"gif -index {i}") for i in range(frame)]
     def update(ind):
-        global showImage
-        frame = frames[ind]
+        im2 = animation[ind]
         ind += 1
-        label.configure(image=frame)
+        label.configure(image=im2)
         if ind == frame:
-            ind = 1
-        showImage = screen_main.after(50, lambda: update(ind))
-        return showImage
+            ind = 0
+        screen_main.after(100, update, ind)
     label = tk.Label(screen_main, bg="black")
     label.pack()
-    screen_main.after(1, lambda: update(ind))
+    screen_main.after(0, update, 0)
+    #start the mainloop
     screen_main.mainloop()
