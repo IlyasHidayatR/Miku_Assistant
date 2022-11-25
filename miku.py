@@ -83,14 +83,7 @@ def chatbot(inp):
     print(out)
     speak(out)
 
-def main():
-    speak("Hello my name is Hikaru Kaito, a virtual assistant. Before we start, please verify your identity")
-    # FaceRecognition.face_recognition(1)
-    face_recognition(1)
-    speak("Your identity has been verified")
-    wishMe()
-    speak("Can I help you master" + MASTER + "?")
-
+def task():
     #logic for tasks as command
     while True:
         query = takeCommand()
@@ -445,6 +438,10 @@ def main():
             speak("Ok, master")
             joke = pyjokes.get_joke()
             speak(joke)
+        #take a rest
+        elif "take a rest" in query.lower() or "take rest" in query.lower():
+            speak("Ok, master. If you need me, just call me")
+            break
         #close aplication
         elif "close" in query.lower() or "exit" in query.lower():
             speak("Ok, master")
@@ -469,9 +466,27 @@ def main():
         else:
             speak("sorry master, your order is not including my program")
 
+def main():
+    speak("Hello my name is Hikaru Kaito, a virtual assistant. Before we start, please verify your identity")
+    # FaceRecognition.face_recognition(1)
+    face_recognition(1)
+    speak("Your identity has been verified")
+    wishMe()
+    speak("If you need my help, please call me master")
+    # wakeWord("hey hikaru") #for testing wake word
+    while True:
+        query1 = takeCommand().lower()
+        # wakeWord("hey hikaru") #for testing wake word
+        if "hikaru" in query1 or "kaito" in query1:
+            speak("I'm listening")
+            task()
+        elif "none" in query1:
+            speak("Sorry, i didn't get that")
+        else:
+            speak("sorry master, I can't hear you call me")
+    
 
 if __name__ == "__main__":
-
     #run main function with screen_main
     screen_main = tk.Tk()
     screen_main.title("Kaito")
