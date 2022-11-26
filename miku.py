@@ -416,7 +416,7 @@ def task():
             speak("Ok, master, Identifying your face...")
             # FaceRecognition.face_recognition1(2)
             face_recognition1(2)
-            if validasi1 == True:
+            if validasi1() == True:
                 speak("Ok, master. Opening the door for 5 seconds")
                 Operation(3)
                 time.sleep(5)
