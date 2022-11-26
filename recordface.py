@@ -2,9 +2,9 @@ import cv2, os, time
 import tkinter as tk
 
 #record face
+valid = 0
 def record_face():
     global valid
-    valid = 0
     camera = 0
     video = cv2.VideoCapture(camera, cv2.CAP_DSHOW)
     faceDetections = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
@@ -53,6 +53,13 @@ def record_face():
         video.release()
         cv2.destroyAllWindows()
         
+def validasi3():
+    global valid
+    if valid == 1:
+        valid = 0
+        return 1
+    else:
+        return 0
 
 #main
 # if __name__ == "__main__":

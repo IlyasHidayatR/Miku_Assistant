@@ -26,9 +26,9 @@ def camera_face(cam):
     return camera
 
 #face recognition with camera cable
+valid1 = False
 def face_recognition(camera):
-    global id, conf
-    valid = False
+    global id, conf, valid1
     video = cv2.VideoCapture(camera_face(camera), cv2.CAP_DSHOW)
     a = 0
     while True:  
@@ -42,7 +42,7 @@ def face_recognition(camera):
             #face recognition of owners
             if id == 1 and conf < 100:
                 id = "Ilyas Hidayat Rusdy"
-                valid = True
+                valid1 = True
                 #print confidance dalam persen
                 conf = "{0}%".format(round(100-conf))
                 print(id + " " + "("+conf+")")
@@ -51,10 +51,10 @@ def face_recognition(camera):
             cv2.putText(frame, str(id), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
         cv2.imshow("Face Recognition", frame)
         key = cv2.waitKey(1)
-        if valid == True:
+        if valid1 == True:
             time.sleep(1)
             print("Face recognized")
-            valid = False
+            # valid1 = False
             break
         if key == ord('q'):
             #input password with GUI tkinter
@@ -67,8 +67,10 @@ def face_recognition(camera):
             entry = tk.Entry(root, show="*")
             entry.pack()
             def check():
+                global valid1
                 if entry.get() == "123":
                     print("Password correct")
+                    valid1 = True
                     root.destroy()
                 else:
                     print("Password incorrect. Please verify with correctly face or restart the program")
@@ -77,14 +79,25 @@ def face_recognition(camera):
             button.pack()
             root.mainloop()
             break
+        if key == ord('n'):
+            valid1 = False
+            break
     video.release()
     cv2.destroyAllWindows()
 
-
+#function validasi face recognition to other file and back valid1 to False (Camera cable)
+def validasi():
+    global valid1
+    if valid1 == True:
+        valid1 = False
+        return True
+    else:
+        return False
+    
 #face recognition with camera wifi
+valid2 = False
 def face_recognition1(camera):
-    global id, conf
-    valid = False
+    global id, conf, valid2
     url = camera_face(camera)
     cv2.namedWindow("Face Recognition", cv2.WINDOW_NORMAL)
     while True:
@@ -99,7 +112,7 @@ def face_recognition1(camera):
             #if id is already in the database and the confidence is greater than 50 then print the face recognized
             if id in recognize_ID and conf < 100:
                 id = recognize_ID[id]
-                valid = True
+                valid2 = True
                 #print confidance dalam persen
                 conf = "{0}%".format(round(100-conf))
                 print(id + " " + "("+conf+")")
@@ -108,10 +121,10 @@ def face_recognition1(camera):
             cv2.putText(img, str(id), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
         cv2.imshow('Face Recognition',img)
         key = cv2.waitKey(1)
-        if valid == True:
+        if valid2 == True:
             time.sleep(1)
             print("Face recognized")
-            valid = False
+            # valid = False
             break
         if key == ord('q'):
             #input password with GUI tkinter
@@ -124,8 +137,10 @@ def face_recognition1(camera):
             entry = tk.Entry(root, show="*")
             entry.pack()
             def check():
+                global valid2
                 if entry.get() == "123":
                     print("Password correct")
+                    valid2 = True
                     root.destroy()
                 else:
                     print("Password incorrect. Please verify with correctly face or restart the program")
@@ -134,7 +149,19 @@ def face_recognition1(camera):
             button.pack()
             root.mainloop()
             break
+        if key == ord('n'):
+            valid2 = False
+            break
     cv2.destroyAllWindows()
+
+#function validasi face recognition to other file and back valid1 to False (Camera wifi)
+def validasi1():
+    global valid2
+    if valid2 == True:
+        valid2 = False
+        return True
+    else:
+        return False
 
 
 # if __name__ == "__main__":

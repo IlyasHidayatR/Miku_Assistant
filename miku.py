@@ -266,18 +266,18 @@ def task():
         elif "open facebook" in query.lower() or "facebook" in query.lower():
             speak("Ok, master, please ferify your face")
             face_recognition(1)
-            # if id == "open":
-            speak("Welcome back, master")
-            #open facebook dan masukkan username dan password dengan selenium
-            driver = webdriver.Chrome(executable_path=r"C:\\chromedriver_win32\\chromedriver.exe")
-            driver.get("https://www.facebook.com/")
-            username = driver.find_element_by_id("email")
-            username.send_keys("ilyashidayatrusdy@yahoo.com")
-            password = driver.find_element_by_id("pass")
-            password.send_keys("16081999")
-            password.send_keys(Keys.RETURN)
-            # else:
-            #     speak("Sorry, you are not master")
+            if validasi() == True:
+                speak("Welcome back, master")
+                #open facebook dan masukkan username dan password dengan selenium
+                driver = webdriver.Chrome(executable_path=r"C:\\chromedriver_win32\\chromedriver.exe")
+                driver.get("https://www.facebook.com/")
+                username = driver.find_element_by_id("email")
+                username.send_keys("ilyashidayatrusdy@yahoo.com")
+                password = driver.find_element_by_id("pass")
+                password.send_keys("16081999")
+                password.send_keys(Keys.RETURN)
+            else:
+                speak("Sorry, you are not master")
         #close facebook if it is open
         elif "close facebook" in query.lower():
             speak("Ok, master")
@@ -286,18 +286,18 @@ def task():
         elif "open instagram" in query.lower() or "instagram" in query.lower():
             speak("Ok, master, please ferify your face")
             face_recognition(1)
-            # if id == "open":
-            speak("Welcome back, master")
-            #open instagram dan masukkan username dan password dengan selenium
-            driver = webdriver.Chrome(executable_path=r"C:\\chromedriver_win32\\chromedriver.exe")
-            driver.get("https://www.instagram.com/")
-            username = driver.find_element_by_name("username")
-            username.send_keys("ilyashidayatrusdy@gmail.com")
-            password = driver.find_element_by_name("password")
-            password.send_keys("Il16081999")
-            password.send_keys(Keys.RETURN)
-            # else:
-            #     speak("Sorry, you are not master")
+            if validasi() == True:
+                speak("Welcome back, master")
+                #open instagram dan masukkan username dan password dengan selenium
+                driver = webdriver.Chrome(executable_path=r"C:\\chromedriver_win32\\chromedriver.exe")
+                driver.get("https://www.instagram.com/")
+                username = driver.find_element_by_name("username")
+                username.send_keys("ilyashidayatrusdy@gmail.com")
+                password = driver.find_element_by_name("password")
+                password.send_keys("Il16081999")
+                password.send_keys(Keys.RETURN)
+            else:
+                speak("Sorry, you are not master")
         #close instagram if it is open
         elif "close instagram" in query.lower():
             speak("Ok, master")
@@ -314,22 +314,22 @@ def task():
         elif "registration face" in query.lower() or "register face" in query.lower():
             speak("Ok, master. Before you register new face, please ferify your face master")
             face_recognition(1)
-            # if id == "open":
-            speak("Welcome back, master. Please look at the camera and create new ID face")
-            try:
-                record_face()
-                if valid == 1:
-                    TrainingFace()
-                    print("Face registration success. If you want the new face to be used, please add the new face ID and name in the variable recognize_ID at facerecognition.py and restart the program")
-                    speak("Face registration success. If you want the new face to be used, please add the new face ID and name in the variable recognize_ID at facerecognition.py and restart the program")
-                else:
+            if validasi() == True:
+                speak("Welcome back, master. Please look at the camera and create new ID face")
+                try:
+                    record_face()
+                    if validasi3() == 1:
+                        TrainingFace()
+                        print("Face registration success. If you want the new face to be used, please add the new face ID and name in the variable recognize_ID at facerecognition.py and restart the program")
+                        speak("Face registration success. If you want the new face to be used, please add the new face ID and name in the variable recognize_ID at facerecognition.py and restart the program")
+                    else:
+                        print("Face registration failed")
+                        speak("Face registration failed")
+                except:
                     print("Face registration failed")
                     speak("Face registration failed")
-            except:
-                print("Face registration failed")
-                speak("Face registration failed")
-            # else:
-            #     speak("Sorry, you are not master")
+            else:
+                speak("Sorry, you are not master")
         #make a note
         elif "make a note" in query.lower() or "make note" in query.lower():
             speak("Ok, master, what should i write?")
@@ -416,13 +416,13 @@ def task():
             speak("Ok, master, Identifying your face...")
             # FaceRecognition.face_recognition1(2)
             face_recognition1(2)
-            # if id == "open":
-            speak("Ok, master. Opening the door for 5 seconds")
-            Operation(3)
-            time.sleep(5)
-            Operation(4)
-            # else:
-            #     speak("Sorry, You're not allowed to open the door")
+            if validasi1 == True:
+                speak("Ok, master. Opening the door for 5 seconds")
+                Operation(3)
+                time.sleep(5)
+                Operation(4)
+            else:
+                speak("Sorry, You're not allowed to open the door")
         #on lampu
         elif "on the lamp" in query.lower() or "on the light" in query.lower():
             speak("Ok, master")
@@ -470,20 +470,26 @@ def main():
     speak("Hello my name is Hikaru Kaito, a virtual assistant. Before we start, please verify your identity")
     # FaceRecognition.face_recognition(1)
     face_recognition(1)
-    speak("Your identity has been verified")
-    wishMe()
-    speak("If you need my help, please call me master")
-    # wakeWord("hey hikaru") #for testing wake word
-    while True:
-        query1 = takeCommand().lower()
+    #validasi function from face recognition
+    if validasi() == True:
+        speak("Your identity has been verified")
+        wishMe()
+        speak("If you need my help, please call me master")
         # wakeWord("hey hikaru") #for testing wake word
-        if "hikaru" in query1 or "kaito" in query1:
-            speak("I'm listening")
-            task()
-        elif "none" in query1:
-            speak("Sorry, i didn't get that")
-        else:
-            speak("sorry master, I can't hear you call me")
+        while True:
+            query1 = takeCommand().lower()
+            # wakeWord("hey hikaru") #for testing wake word
+            if "hikaru" in query1 or "kaito" in query1:
+                speak("I'm listening")
+                task()
+            elif "none" in query1:
+                speak("Sorry, i didn't get that")
+            else:
+                speak("sorry master, I can't hear you call me")
+    else:
+        speak("Sorry, your identity is not verified")
+        speak("Please try again later")
+        speak("Good bye")
     
 
 if __name__ == "__main__":
