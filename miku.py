@@ -444,7 +444,7 @@ def task():
             break
         #close aplication
         elif "close" in query.lower() or "exit" in query.lower():
-            speak("Ok, master")
+            speak("Ok, master. Enjoy your day")
             exit()
         #Shutdown
         elif "shutdown" in query.lower() or "shut down" in query.lower():
@@ -460,7 +460,7 @@ def task():
             os.system("shutdown /h")
         #chat with Kaito
         elif "hikaru" in query.lower() or "kaito" in query.lower():
-            chatbot(query)
+            chatbot(query.lower())
         elif "none" in query.lower():
             speak("Sorry, i didn't get that")
         else:
