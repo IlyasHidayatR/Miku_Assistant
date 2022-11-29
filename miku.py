@@ -318,7 +318,7 @@ def task():
                 speak("Welcome back, master. Please look at the camera and create new ID face")
                 try:
                     record_face()
-                    if validasi3() == 1:
+                    if validasi2() == 1:
                         TrainingFace()
                         print("Face registration success. If you want the new face to be used, please add the new face ID and name in the variable recognize_ID at facerecognition.py and restart the program")
                         speak("Face registration success. If you want the new face to be used, please add the new face ID and name in the variable recognize_ID at facerecognition.py and restart the program")

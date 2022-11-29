@@ -53,7 +53,7 @@ def record_face():
         video.release()
         cv2.destroyAllWindows()
         
-def validasi3():
+def validasi2():
     global valid
     if valid == 1:
         valid = 0
