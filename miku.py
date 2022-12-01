@@ -412,7 +412,7 @@ def task():
             print(answer)
             speak("The answer is " + answer)
         #open lock door selenoid
-        elif "open the door" in query.lower() or "open door" in query.lower():
+        elif "open the door" in query.lower() or "open door" in query.lower() or "open the lock door" in query.lower() or "room" in query.lower():
             speak("Ok, master, Identifying your face...")
             # FaceRecognition.face_recognition1(2)
             face_recognition1(2)

@@ -12,8 +12,8 @@ Elektronik = ["http://192.168.43.72/LED=ON", "http://192.168.43.72/LED=OFF", "ht
 #     data_serial.write(b'1')
 #     data = data_serial.readline().decode('ascii')
 #     return data
+
 def Operation(self):
-    # user_input = self
     if self == 1:
         print("LED ON")
         try:
@@ -21,7 +21,7 @@ def Operation(self):
             print(LED_ON)
             print("LED is ON")
         except Exception as e:
-            print(" ")
+            pass
     elif self == 2:
         print("LED OFF")
         try:
@@ -29,18 +29,15 @@ def Operation(self):
             print(LED_OFF)
             print("LED is OFF")
         except Exception as e:
-            print(" ")
+            pass
     elif self == 3:
         print("LOCK ON")
         try:
             LOCK_ON = urllib.request.urlopen(Elektronik[2])
             print(LOCK_ON)
             print("Lock Door is ON")
-            # time.sleep(5)
-            # r = requests.get(lockOFF_url)
-            # print(r)
         except Exception as e:
-            print(" ")
+            pass
     elif self == 4:
         print("LOCK OFF")
         try:
@@ -48,8 +45,10 @@ def Operation(self):
             print(LOCK_OFF)
             print ("Lock Door is OFF")
         except Exception as e:
-            print(" ")
-
+            pass
+    return self
+    
+    # user_input = self
     # if user_input == 'a':
     #     print(getValue())
     # elif user_input == 'b':

@@ -109,7 +109,7 @@ def face_recognition1(camera):
         for (x,y,w,h) in faces:
             cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
             id, conf = recognizer.predict(gray[y:y+h, x:x+w])
-            #if id is already in the database and the confidence is greater than 50 then print the face recognized
+            #if id is already in the database and the confidence is greater than 0 then print the face recognized
             if id in recognize_ID and conf < 100:
                 id = recognize_ID[id]
                 valid2 = True
