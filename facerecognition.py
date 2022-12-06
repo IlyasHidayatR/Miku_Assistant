@@ -56,7 +56,7 @@ def face_recognition(camera):
             print("Face recognized")
             # valid1 = False
             break
-        if key == ord('q'):
+        elif key == ord('q'):
             #input password with GUI tkinter
             root = tk.Tk()
             root.title("Password")
@@ -79,7 +79,7 @@ def face_recognition(camera):
             button.pack()
             root.mainloop()
             break
-        if key == ord('n'):
+        elif key == ord('n'):
             valid1 = False
             break
     video.release()
@@ -126,7 +126,7 @@ def face_recognition1(camera):
             print("Face recognized")
             # valid = False
             break
-        if key == ord('q'):
+        elif key == ord('q'):
             #input password with GUI tkinter
             root = tk.Tk()
             root.title("Password")
@@ -149,7 +149,7 @@ def face_recognition1(camera):
             button.pack()
             root.mainloop()
             break
-        if key == ord('n'):
+        elif key == ord('n'):
             valid2 = False
             break
     cv2.destroyAllWindows()

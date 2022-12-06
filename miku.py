@@ -503,8 +503,8 @@ if __name__ == "__main__":
     tk.Label(screen_main, text="Hikaru Kaito", bg="black", fg="white", font=("Calibri", 30)).pack()
     tk.Label(screen_main, text="Your Personal Assistant", bg="black", fg="white", font=("Calibri", 15)).pack()
     tk.Label(screen_main, text="", bg="black").pack()
-    #create a button
-    tk.Button(screen_main, text="Start", width=10, height=1, command=main).pack()
+    #create a modern button for start the event
+    tk.Button(screen_main, text="Start", width=10, height=1, bg="white", fg="black", font=("Calibri", 15), command=main).pack()
     #start gif animation image
     openImage = Image.open("Kaito.gif")
 
