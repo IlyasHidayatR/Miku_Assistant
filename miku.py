@@ -21,7 +21,9 @@ from masker import *
 from recordface import *
 from traningface import *
 # from arduino_tools import *
-from FaceRecognition import FaceRecognition
+# from FaceRecognition import FaceRecognition
+# from FaceRecognition import recordFace
+# from FaceRecognition import trainingModel
 
 
 print ("initializing Hikaru Kaito")
@@ -265,6 +267,7 @@ def task():
         #open facebook
         elif "open facebook" in query.lower() or "facebook" in query.lower():
             speak("Ok, master, please ferify your face")
+            # FaceRecognition.face_recognition(1)
             face_recognition(1)
             if validasi() == True:
                 speak("Welcome back, master")
@@ -285,6 +288,7 @@ def task():
         #open instagram
         elif "open instagram" in query.lower() or "instagram" in query.lower():
             speak("Ok, master, please ferify your face")
+            # FaceRecognition.face_recognition(1)
             face_recognition(1)
             if validasi() == True:
                 speak("Welcome back, master")
@@ -313,12 +317,15 @@ def task():
         #regitraion face
         elif "registration face" in query.lower() or "register face" in query.lower():
             speak("Ok, master. Before you register new face, please ferify your face master")
+            # FaceRecognition.face_recognition(1)
             face_recognition(1)
             if validasi() == True:
                 speak("Welcome back, master. Please look at the camera and create new ID face")
                 try:
+                    # recordFace.record_face()
                     record_face()
                     if validasi2() == 1:
+                        # trainingModel.trainingFace()
                         TrainingFace()
                         print("Face registration success. If you want the new face to be used, please add the new face ID and name in the variable recognize_ID at facerecognition.py and restart the program")
                         speak("Face registration success. If you want the new face to be used, please add the new face ID and name in the variable recognize_ID at facerecognition.py and restart the program")

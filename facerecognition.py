@@ -10,8 +10,7 @@ recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('dataset/trainer.yml')
 
 #dictionary ID and name of the person for face recognition with camera wifi
-recognize_ID = {1: "Ilyas Hidayat Rusdy", 
-                4: "Agung Wicaksana", 
+recognize_ID = {1: "Ilyas Hidayat Rusdy",
                 8: "Meirli",
                 9: "Zahra",
                 7: "Acep Taufik Hidayat",
@@ -48,6 +47,7 @@ def face_recognition(camera):
                 print(id + " " + "("+conf+")")
             else:
                 id = "Unknown"
+                valid1 = False
             cv2.putText(frame, str(id), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
         cv2.imshow("Face Recognition", frame)
         key = cv2.waitKey(1)
@@ -118,6 +118,7 @@ def face_recognition1(camera):
                 print(id + " " + "("+conf+")")
             else:
                 id = "Unknown"
+                valid2 = False
             cv2.putText(img, str(id), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
         cv2.imshow('Face Recognition',img)
         key = cv2.waitKey(1)
