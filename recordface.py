@@ -61,7 +61,7 @@ def validasi2():
     else:
         return 0
 
-#main
+# main
 # if __name__ == "__main__":
 #     record_face()
 #     print(valid)

@@ -275,9 +275,9 @@ def task():
                 driver = webdriver.Chrome(executable_path=r"C:\\chromedriver_win32\\chromedriver.exe")
                 driver.get("https://www.facebook.com/")
                 username = driver.find_element_by_id("email")
-                username.send_keys("ilyashidayatrusdy@yahoo.com")
+                username.send_keys("xxxxxxxx@yahoo.com")
                 password = driver.find_element_by_id("pass")
-                password.send_keys("16081999")
+                password.send_keys("xxxxxxx")
                 password.send_keys(Keys.RETURN)
             else:
                 speak("Sorry, you are not master")
@@ -296,9 +296,9 @@ def task():
                 driver = webdriver.Chrome(executable_path=r"C:\\chromedriver_win32\\chromedriver.exe")
                 driver.get("https://www.instagram.com/")
                 username = driver.find_element_by_name("username")
-                username.send_keys("ilyashidayatrusdy@gmail.com")
+                username.send_keys("xxxxxxx@gmail.com")
                 password = driver.find_element_by_name("password")
-                password.send_keys("Il16081999")
+                password.send_keys("xxxxxxx")
                 password.send_keys(Keys.RETURN)
             else:
                 speak("Sorry, you are not master")

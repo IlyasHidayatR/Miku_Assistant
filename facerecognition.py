@@ -11,9 +11,14 @@ recognizer.read('dataset/trainer.yml')
 
 #dictionary ID and name of the person for face recognition with camera wifi
 recognize_ID = {1: "Ilyas Hidayat Rusdy",
+                2: "Dika Priyatna",
+                3: "Diksa Dinata",
+                4: "Agung Wicaksana",
+                5: "Sindu",
+                6: "Resika Arthana",
+                7: "Acep Taufik Hidayat",
                 8: "Meirli",
                 9: "Zahra",
-                7: "Acep Taufik Hidayat",
                 10: "Anisza"}
 
 #camera face
@@ -56,6 +61,11 @@ def face_recognition(camera):
             print("Face recognized")
             # valid1 = False
             break
+        # elif valid1 == False:
+        #     time.sleep(1)
+        #     print("Face not recognized")
+        #     # valid1 = False
+        #     break
         elif key == ord('q'):
             #input password with GUI tkinter
             root = tk.Tk()
@@ -127,6 +137,11 @@ def face_recognition1(camera):
             print("Face recognized")
             # valid = False
             break
+        # elif valid2 == False:
+        #     time.sleep(1)
+        #     print("Face not recognized")
+        #     # valid = False
+        #     break
         elif key == ord('q'):
             #input password with GUI tkinter
             root = tk.Tk()
@@ -165,28 +180,30 @@ def validasi1():
         return False
 
 
-# if __name__ == "__main__":
-#     while True:
-#         print("1. Face Recognition with Camera Cable")
-#         print("2. Face Recognition with Camera Wifi")
-#         print("3. Exit")
-#         pilihan = int(input("Choose the camera: "))
-#         if pilihan == 1:
-#             #start time
-#             start = time.time()
-#             face_recognition(1)
-#             #end time
-#             end = time.time()
-#             print("Time: ", end - start)
-#         elif pilihan == 2:
-#             #start time
-#             start = time.time()
-#             face_recognition1(2)
-#             #end time
-#             end = time.time()
-#             #print time
-#             print("Time: ", end - start)
-#         elif pilihan == 3:
-#             break
-#         else:
-#             print("Please choose the correct camera")
+if __name__ == "__main__":
+    while True:
+        print("1. Face Recognition with Camera Cable")
+        print("2. Face Recognition with Camera Wifi")
+        print("3. Exit")
+        pilihan = int(input("Choose the camera: "))
+        if pilihan == 1:
+            #start time
+            start = time.time()
+            face_recognition(1)
+            validasi()
+            #end time
+            end = time.time()
+            print("Time: ", end - start)
+        elif pilihan == 2:
+            #start time
+            start = time.time()
+            face_recognition1(2)
+            validasi1()
+            #end time
+            end = time.time()
+            #print time
+            print("Time: ", end - start)
+        elif pilihan == 3:
+            break
+        else:
+            print("Please choose the correct camera")
