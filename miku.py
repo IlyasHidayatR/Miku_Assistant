@@ -14,7 +14,7 @@ import tkinter as tk
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from chat import *
+# from chat import *
 from facerecognition import *
 from serial_esp32 import *
 from masker import *
@@ -466,8 +466,8 @@ def task():
             speak("Ok, master")
             os.system("shutdown /h")
         #chat with Kaito
-        elif "hikaru" in query.lower() or "kaito" in query.lower():
-            chatbot(query.lower())
+        # elif "hikaru" in query.lower() or "kaito" in query.lower():
+        #     chatbot(query.lower())
         elif "none" in query.lower():
             speak("Sorry, i didn't get that")
         else:
